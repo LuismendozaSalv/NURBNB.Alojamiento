@@ -27,15 +27,16 @@ namespace NURBNB.Alojamiento.Infrastructure.UsesCases.Ciudad.Query
 
             if (!string.IsNullOrWhiteSpace(request.SearchTerm))
             {
-                query = query.Where(x => x.Nombre.Contains(request.SearchTerm));
+                query = query.Include(x => x.Pais).Where(x => x.Nombre.Contains(request.SearchTerm));
             }
 
-            return await query.Select(pais =>
+            return await query.Select(ciudad =>
                 new CiudadDto
                 {
-                    Id = pais.Id,
-                    Nombre = pais.Nombre,
-                    PaisId = pais.PaisId
+                    Id = ciudad.Id,
+                    Nombre = ciudad.Nombre,
+                    PaisId = ciudad.PaisId,
+                    NombrePais = ciudad.Pais.Nombre
                 }).ToListAsync(cancellationToken);
         }
     }

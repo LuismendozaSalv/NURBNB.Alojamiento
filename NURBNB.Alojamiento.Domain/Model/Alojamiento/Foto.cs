@@ -3,13 +3,14 @@ using Restaurant.SharedKernel.Core;
 
 namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
 {
-    public record Foto : ValueObject
+    public class Foto : Entity
     {
         public string Url { get; init; }
 
         public Foto(string url)
         {
             CheckRule(new IsValidUrl(url));
+            Id = Guid.NewGuid();
             Url = url;
         }
 

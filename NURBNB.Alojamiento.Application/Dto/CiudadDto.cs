@@ -11,5 +11,6 @@ namespace NURBNB.Alojamiento.Application.Dto
         public Guid Id { get; set; }
         public string Nombre { get; set; }
         public Guid PaisId { get; set; }
+        public string NombrePais { get; set; }
     }
 }

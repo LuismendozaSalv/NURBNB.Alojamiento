@@ -11,12 +11,19 @@ namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
 
         private Pais() { }
 
-        internal Pais(string name, string countryCode)
+        public Pais(string name, string countryCode)
         {
             Id = Guid.NewGuid();
             Name = name;
             CountryCode = countryCode;
             _ciudades = new List<Ciudad>();
+        }
+
+        public void AgregarCiudad(string NombreCiudad)
+        {
+            var ciudad = new Ciudad(NombreCiudad, this);
+
+            _ciudades.Add(ciudad);
         }
     }
 }

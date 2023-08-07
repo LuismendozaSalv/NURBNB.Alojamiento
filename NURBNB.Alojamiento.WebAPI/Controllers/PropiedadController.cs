@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarDireccionPropiedad;
+using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarFotos;
+using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarReglasPropiedad;
 using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.CrearAlojamiento;
 using NURBNB.Alojamiento.Application.UseCases.Ciudad.Command.CrearCiudad;
 
@@ -29,6 +31,22 @@ namespace NURBNB.Alojamiento.WebAPI.Controllers
         [HttpPost]
         [Route("AgregarDireccion")]
         public async Task<IActionResult> AgregarDireccion([FromBody] AgregarDireccionPropiedadCommand command)
+        {
+            var propiedadId = await _mediator.Send(command);
+            return Ok(propiedadId);
+        }
+
+        [HttpPost]
+        [Route("AgregarFotos")]
+        public async Task<IActionResult> AgregarFotos([FromBody] AgregarFotosPropiedadCommand command)
+        {
+            var propiedadId = await _mediator.Send(command);
+            return Ok(propiedadId);
+        }
+
+        [HttpPost]
+        [Route("AgregarReglas")]
+        public async Task<IActionResult> AgregarReglas([FromBody] AgregarReglasPropiedadCommand command)
         {
             var propiedadId = await _mediator.Send(command);
             return Ok(propiedadId);

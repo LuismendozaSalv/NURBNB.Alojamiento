@@ -3,7 +3,7 @@ using Restaurant.SharedKernel.Rules;
 
 namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
 {
-    public record Regla : ValueObject
+    public class Regla : Entity
     {
         public string Value { get; init; }
 
