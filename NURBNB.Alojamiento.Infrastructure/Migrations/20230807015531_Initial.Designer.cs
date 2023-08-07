@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NURBNB.Alojamiento.Infrastructure.EF.Context;
 
@@ -11,9 +12,11 @@ using NURBNB.Alojamiento.Infrastructure.EF.Context;
 namespace NURBNB.Alojamiento.Infrastructure.Migrations
 {
     [DbContext(typeof(ReadDbContext))]
-    partial class ReadDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230807015531_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,7 +54,7 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("Id");
+                        .HasColumnName("direccionId");
 
                     b.Property<string>("Avenida")
                         .IsRequired()
@@ -202,11 +205,11 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("propiedadId");
 
-                    b.Property<string>("Value")
+                    b.Property<string>("valor")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)")
-                        .HasColumnName("Value");
+                        .HasColumnName("valor");
 
                     b.HasKey("Id");
 

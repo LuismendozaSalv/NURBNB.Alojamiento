@@ -7,9 +7,9 @@ namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
     public class Direccion : Entity
     {
         public Guid PropiedadId { get; private set; }
-        public string Street { get; init; }
-        public string Avenue { get; init; }
-        public string Reference { get; init; }
+        public string Calle { get; init; }
+        public string Avenida { get; init; }
+        public string Referencia { get; init; }
         public double Latitud { get; init; }
         public double Longitud { get; init; }
         public Ciudad Ciudad { get; private set; }
@@ -18,17 +18,18 @@ namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
         {
 
         }
-        internal Direccion(Guid propiedadId, string street, string avenue, string reference, 
+        internal Direccion(Guid propiedadId, string calle, string avenida, string referencia, 
             double latitud, double longitud, Ciudad ciudad)
         {
-            CheckRule(new StringNotNullOrEmptyRule(street));
-            CheckRule(new StringNotNullOrEmptyRule(avenue));
-            CheckRule(new StringNotNullOrEmptyRule(reference));
+            CheckRule(new StringNotNullOrEmptyRule(calle));
+            CheckRule(new StringNotNullOrEmptyRule(avenida));
+            CheckRule(new StringNotNullOrEmptyRule(referencia));
             CheckRule(new IsValidCoordinate(latitud, longitud));
+            Id = Guid.NewGuid();
             PropiedadId = propiedadId;
-            Street = street;
-            Avenue = avenue;
-            Reference = reference;
+            Calle = calle;
+            Avenida = avenida;
+            Referencia = referencia;
             Latitud = latitud;
             Longitud = longitud;
             Ciudad = ciudad;

@@ -70,6 +70,8 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Config
                 }
             );
 
+            builder.OwnsOne(e => e.Direccion);
+
             builder.OwnsMany(e => e.Fotos);
             builder.OwnsMany(e => e.Reglas);
 
@@ -83,15 +85,15 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Config
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id)
-            .HasColumnName("direccionId");
+            .HasColumnName("Id");
 
-            builder.Property(x => x.Street)
+            builder.Property(x => x.Calle)
             .HasColumnName("calle");
 
-            builder.Property(x => x.Avenue)
+            builder.Property(x => x.Avenida)
             .HasColumnName("avenida");
 
-            builder.Property(x => x.Reference)
+            builder.Property(x => x.Referencia)
             .HasColumnName("referencia");
 
             builder.Property(x => x.Latitud)

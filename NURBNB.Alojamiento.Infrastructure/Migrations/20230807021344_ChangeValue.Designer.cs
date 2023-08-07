@@ -12,8 +12,8 @@ using NURBNB.Alojamiento.Infrastructure.EF.Context;
 namespace NURBNB.Alojamiento.Infrastructure.Migrations
 {
     [DbContext(typeof(ReadDbContext))]
-    [Migration("20230806232444_Initial")]
-    partial class Initial
+    [Migration("20230807021344_ChangeValue")]
+    partial class ChangeValue
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -105,7 +105,7 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("fotoId");
+                        .HasColumnName("Id");
 
                     b.Property<Guid>("PropiedadId")
                         .HasColumnType("uniqueidentifier")
@@ -199,17 +199,17 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("reglaId");
+                        .HasColumnName("Id");
 
                     b.Property<Guid>("PropiedadId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("propiedadId");
 
-                    b.Property<string>("valor")
+                    b.Property<string>("Value")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)")
-                        .HasColumnName("valor");
+                        .HasColumnName("Value");
 
                     b.HasKey("Id");
 

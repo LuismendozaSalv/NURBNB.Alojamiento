@@ -12,7 +12,7 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.ReadModel
     public class DireccionReadModel
     {
         [Key]
-        [Column("direccionId")]
+        [Column("Id")]
         public Guid Id { get; set; }
 
         [Required]

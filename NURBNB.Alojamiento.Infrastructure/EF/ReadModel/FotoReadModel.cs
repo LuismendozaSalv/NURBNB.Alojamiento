@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 
 namespace NURBNB.Alojamiento.Infrastructure.EF.ReadModel
 {
@@ -13,7 +14,7 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.ReadModel
     public class FotoReadModel
     {
         [Key]
-        [Column("fotoId")]
+        [Column("Id")]
         public Guid Id { get; set; }
 
         [Required]

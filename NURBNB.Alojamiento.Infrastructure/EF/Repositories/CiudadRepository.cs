@@ -25,7 +25,7 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Repositories
 
         public async Task<Ciudad?> FindByIdAsync(Guid id)
         {
-            return await _context.Ciudad.SingleOrDefaultAsync(x => x.Id == id);
+            return await _context.Ciudad.FindAsync(id);
         }
 
         public Task UpdateAsync(Ciudad ciudad)

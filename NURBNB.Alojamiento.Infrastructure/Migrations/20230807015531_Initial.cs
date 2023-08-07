@@ -65,13 +65,13 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
                 name: "foto",
                 columns: table => new
                 {
-                    fotoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     propiedadId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     url = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_foto", x => x.fotoId);
+                    table.PrimaryKey("PK_foto", x => x.Id);
                     table.ForeignKey(
                         name: "FK_foto_propiedad_propiedadId",
                         column: x => x.propiedadId,
@@ -84,13 +84,13 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
                 name: "regla",
                 columns: table => new
                 {
-                    reglaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     propiedadId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     valor = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_regla", x => x.reglaId);
+                    table.PrimaryKey("PK_regla", x => x.Id);
                     table.ForeignKey(
                         name: "FK_regla_propiedad_propiedadId",
                         column: x => x.propiedadId,

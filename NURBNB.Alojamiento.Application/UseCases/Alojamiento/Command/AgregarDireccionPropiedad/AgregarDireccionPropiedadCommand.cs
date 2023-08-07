@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarDireccionPropiedad
 {
-    public class AgregarDireccionPropiedadCommand
+    public class AgregarDireccionPropiedadCommand : IRequest<Guid>
     {
+        public Guid PropiedadId { get; set; }
         public string Calle { get; set; }
         public string Avenida { get; set; }
         public string Referencia { get; set; }

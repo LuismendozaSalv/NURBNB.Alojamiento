@@ -10,7 +10,6 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Context
         public virtual DbSet<CiudadReadModel> Ciudad { set; get; }
         public virtual DbSet<PropiedadReadModel> Propiedad { set; get; }
         public virtual DbSet<DireccionReadModel> Direccion { set; get; }
-        public virtual DbSet<FotoReadModel> Foto { set; get; }
         public ReadDbContext(DbContextOptions<ReadDbContext> options) : base(options)
         {
         }
@@ -23,7 +22,6 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Context
             {
                 entity.HasKey(e => e.Id);
 
-                // Configurar la relación uno a muchos con FotoReadModel
                 entity.HasMany(e => e.Fotos)
                       .WithOne()
                       .HasForeignKey(e => e.PropiedadId)
@@ -34,7 +32,6 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Context
             {
                 entity.HasKey(e => e.Id);
 
-                // Configurar la relación uno a muchos con FotoReadModel
                 entity.HasMany(e => e.Reglas)
                       .WithOne()
                       .HasForeignKey(e => e.PropiedadId)

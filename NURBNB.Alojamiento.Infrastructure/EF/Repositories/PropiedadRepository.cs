@@ -20,7 +20,9 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Repositories
 
         public async Task<Propiedad?> FindByIdAsync(Guid id)
         {
-            return await _context.Propiedad.SingleOrDefaultAsync(x => x.Id == id);
+            return await _context.Propiedad
+                .Include(x => x.Capacidad)
+                .Where(x => x.Id == id).AsSplitQuery().FirstOrDefaultAsync();
         }
 
         public Task UpdateAsync(Propiedad Propiedad)

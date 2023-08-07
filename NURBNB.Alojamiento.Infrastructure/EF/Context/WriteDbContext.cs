@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Infrastructure.EF.Context
 {
-    internal class WriteDbContext : DbContext
+    public class WriteDbContext : DbContext
     {
         public virtual DbSet<Pais> Pais { set; get; }
         public virtual DbSet<Ciudad> Ciudad { set; get; }

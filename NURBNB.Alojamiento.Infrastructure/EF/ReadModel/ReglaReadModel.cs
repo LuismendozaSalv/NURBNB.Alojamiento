@@ -12,16 +12,16 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.ReadModel
     public class ReglaReadModel
     {
         [Key]
-        [Column("reglaId")]
+        [Column("Id")]
         public Guid Id { get; set; }
 
         [Required]
         [Column("propiedadId")]
         public Guid PropiedadId { get; set; }
 
-        [Column("valor")]
+        [Column("Value")]
         [StringLength(250)]
         [Required]
-        public string valor { get; set; }
+        public string Value { get; set; }
     }
 }
