@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace NURBNB.Alojamiento.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -86,7 +86,7 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     propiedadId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    valor = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
+                    Value = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -103,7 +103,7 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
                 name: "direccion",
                 columns: table => new
                 {
-                    direccionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     propiedadId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     calle = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     avenida = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
@@ -114,7 +114,7 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_direccion", x => x.direccionId);
+                    table.PrimaryKey("PK_direccion", x => x.Id);
                     table.ForeignKey(
                         name: "FK_direccion_ciudad_ciudadId",
                         column: x => x.ciudadId,

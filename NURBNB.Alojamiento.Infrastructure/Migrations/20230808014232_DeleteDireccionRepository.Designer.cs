@@ -12,8 +12,8 @@ using NURBNB.Alojamiento.Infrastructure.EF.Context;
 namespace NURBNB.Alojamiento.Infrastructure.Migrations
 {
     [DbContext(typeof(ReadDbContext))]
-    [Migration("20230807021344_ChangeValue")]
-    partial class ChangeValue
+    [Migration("20230808014232_DeleteDireccionRepository")]
+    partial class DeleteDireccionRepository
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,7 +54,7 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("direccionId");
+                        .HasColumnName("Id");
 
                     b.Property<string>("Avenida")
                         .IsRequired()

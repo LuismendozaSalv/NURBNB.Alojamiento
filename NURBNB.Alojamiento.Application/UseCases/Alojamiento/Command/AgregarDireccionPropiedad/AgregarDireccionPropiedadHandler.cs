@@ -15,15 +15,12 @@ namespace NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarDir
     {
         private IPropiedadRepository _propiedadRepository;
         private ICiudadRepository _ciudadRepository;
-        private IDireccionRepository _direccionRepository;
         private IUnitOfWork _unitOfWork;
 
         public AgregarDireccionPropiedadHandler(IPropiedadRepository propiedadRepository,
             ICiudadRepository ciudadRepository,
-            IDireccionRepository direccionRepository,
             IUnitOfWork unitOfWork)
         {
-            _direccionRepository = direccionRepository;
             _ciudadRepository = ciudadRepository;
             _propiedadRepository = propiedadRepository;
             _unitOfWork = unitOfWork;
@@ -37,7 +34,6 @@ namespace NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarDir
                 if (ciudad != null)
                 {
                     propiedad.AgregarDireccion(request.Calle, request.Avenida, request.Referencia, request.Latitud, request.Longitud, ciudad);
-                    await _direccionRepository.CreateAsync(propiedad.Direccion);
                     await _propiedadRepository.UpdateAsync(propiedad);
                     await _unitOfWork.Commit();
                     return propiedad.Id;

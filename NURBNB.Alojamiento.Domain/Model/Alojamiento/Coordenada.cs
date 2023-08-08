@@ -1,11 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using NURBNB.Alojamiento.Domain.Rules;
+﻿using NURBNB.Alojamiento.Domain.Rules;
 using Restaurant.SharedKernel.Core;
 using System.ComponentModel.DataAnnotations;
 
 namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
 {
-    [Keyless]
     public record Coordenada : ValueObject
     {
         public double Latitud { get; init; }

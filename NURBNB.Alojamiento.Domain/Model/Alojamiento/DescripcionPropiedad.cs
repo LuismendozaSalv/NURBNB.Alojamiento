@@ -13,7 +13,7 @@ namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
 
         public DescripcionPropiedad(string value)
         {
-            if (String.IsNullOrEmpty(value)) throw new ArgumentException("La descripción no puede estar vacía");
+            if (string.IsNullOrEmpty(value)) throw new ArgumentException("La descripción no puede estar vacía");
             if (value.Length > 250) throw new ArgumentException("La descripción no puede tener más de 250 caracteres");
             Value = value;
         }

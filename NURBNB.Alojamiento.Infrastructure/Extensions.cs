@@ -24,7 +24,6 @@ namespace NURBNB.Alojamiento.Infrastructure
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             AddDatabase(services, configuration, isDevelopment);
-            InitDatabase(services);
             return services;
         }
 
@@ -43,13 +42,18 @@ namespace NURBNB.Alojamiento.Infrastructure
             services.AddScoped<IPaisRepository, PaisRepository>();
             services.AddScoped<ICiudadRepository, CiudadRepository>();
             services.AddScoped<IPropiedadRepository, PropiedadRepository>();
-            services.AddScoped<IDireccionRepository, DireccionRepository>();
 
             using var scope = services.BuildServiceProvider().CreateScope();
             if (!isDevelopment)
             {
                 var context = scope.ServiceProvider.GetRequiredService<ReadDbContext>();
                 context.Database.Migrate();
+            }
+            var readContext = scope.ServiceProvider.GetRequiredService<ReadDbContext>();
+            if (!readContext.Database.GetPendingMigrations().Any() && 
+                readContext.Database.GetMigrations().Any())
+            {
+                InitDatabase(services);
             }
         }
 

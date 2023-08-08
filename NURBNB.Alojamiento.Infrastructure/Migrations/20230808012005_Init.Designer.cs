@@ -12,8 +12,8 @@ using NURBNB.Alojamiento.Infrastructure.EF.Context;
 namespace NURBNB.Alojamiento.Infrastructure.Migrations
 {
     [DbContext(typeof(ReadDbContext))]
-    [Migration("20230807065203_ChangeDefault")]
-    partial class ChangeDefault
+    [Migration("20230808012005_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -3,18 +3,22 @@ using Restaurant.SharedKernel.Rules;
 
 namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
 {
-    public record Comodidad : ValueObject
+    public class Comodidad : Entity
     {
-        public string Value { get; init; }
+        public string Nombre { get; private set; }
+        public string Descripcion { get; private set; }
 
-        public Comodidad(string value)
+        public Comodidad()
         {
-            CheckRule(new StringNotNullOrEmptyRule(value));
-            Value = value;
+            
         }
-
-        public static implicit operator string(Comodidad amenity) => amenity.Value;
-
-        public static implicit operator Comodidad(string amenity) => new(amenity);
+        public Comodidad(string nombre, string descripcion)
+        {
+            CheckRule(new StringNotNullOrEmptyRule(nombre));
+            CheckRule(new StringNotNullOrEmptyRule(descripcion));
+            Id = Guid.NewGuid();
+            Nombre = nombre;
+            Descripcion = descripcion;
+        }   
     }
 }

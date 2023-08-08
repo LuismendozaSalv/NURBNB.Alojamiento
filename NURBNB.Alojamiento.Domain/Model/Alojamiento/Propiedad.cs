@@ -8,8 +8,8 @@ namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
         public TituloPropiedad Titulo { get; private set; }
         public DescripcionPropiedad Descripcion { get; private set; }
         public Precio Precio { get; private set; }
-        public Direccion Direccion { get; private set; }
-        public Capacidad Capacidad { get; private set; }
+        public Direccion? Direccion { get; private set; }
+        public Capacidad? Capacidad { get; private set; }
         public TipoPropiedad TipoPropiedad { get; private set; }
         private readonly IList<Foto> _fotos;
         public IEnumerable<Foto> Fotos => _fotos;
@@ -41,14 +41,14 @@ namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
         {
             Direccion = new Direccion(this.Id, calle, avenida, referencia, latitud, longitud, ciudad);
         }
-        
-        //public void AgregarComodidad(string value)
+
+        //public void AgregarComodidad(Comodidad nuevaComodidad)
         //{
-        //    if (_comodidades.Any(comodidad => comodidad.Value == value))
+        //    if (_comodidades.Any(comodidad => comodidad.Id == nuevaComodidad.Id))
         //    {
         //        throw new ArgumentException("La comodidad ya existe");
         //    }
-        //    _comodidades.Add(value);
+        //    _comodidades.Add(nuevaComodidad);
         //}
 
         public void AgregarFoto(string url)
