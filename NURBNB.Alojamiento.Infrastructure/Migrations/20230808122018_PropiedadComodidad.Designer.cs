@@ -12,8 +12,8 @@ using NURBNB.Alojamiento.Infrastructure.EF.Context;
 namespace NURBNB.Alojamiento.Infrastructure.Migrations
 {
     [DbContext(typeof(ReadDbContext))]
-    [Migration("20230808012005_Init")]
-    partial class Init
+    [Migration("20230808122018_PropiedadComodidad")]
+    partial class PropiedadComodidad
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,6 +47,30 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
                     b.HasIndex("PaisId");
 
                     b.ToTable("ciudad");
+                });
+
+            modelBuilder.Entity("NURBNB.Alojamiento.Infrastructure.EF.ReadModel.ComodidadReadModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("descripcion");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnName("nombre");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("comodidad");
                 });
 
             modelBuilder.Entity("NURBNB.Alojamiento.Infrastructure.EF.ReadModel.DireccionReadModel", b =>
@@ -146,6 +170,30 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("pais");
+                });
+
+            modelBuilder.Entity("NURBNB.Alojamiento.Infrastructure.EF.ReadModel.PropiedadComodidadReadModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
+
+                    b.Property<Guid>("ComodidadId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("comodidadId");
+
+                    b.Property<Guid>("PropiedadId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("propiedadId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComodidadId");
+
+                    b.HasIndex("PropiedadId");
+
+                    b.ToTable("propiedadComodidad");
                 });
 
             modelBuilder.Entity("NURBNB.Alojamiento.Infrastructure.EF.ReadModel.PropiedadReadModel", b =>
@@ -257,6 +305,25 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("NURBNB.Alojamiento.Infrastructure.EF.ReadModel.PropiedadComodidadReadModel", b =>
+                {
+                    b.HasOne("NURBNB.Alojamiento.Infrastructure.EF.ReadModel.ComodidadReadModel", "Comodidad")
+                        .WithMany()
+                        .HasForeignKey("ComodidadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NURBNB.Alojamiento.Infrastructure.EF.ReadModel.PropiedadReadModel", "Propiedad")
+                        .WithMany("Comodidades")
+                        .HasForeignKey("PropiedadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comodidad");
+
+                    b.Navigation("Propiedad");
+                });
+
             modelBuilder.Entity("NURBNB.Alojamiento.Infrastructure.EF.ReadModel.ReglaReadModel", b =>
                 {
                     b.HasOne("NURBNB.Alojamiento.Infrastructure.EF.ReadModel.PropiedadReadModel", null)
@@ -268,6 +335,8 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
 
             modelBuilder.Entity("NURBNB.Alojamiento.Infrastructure.EF.ReadModel.PropiedadReadModel", b =>
                 {
+                    b.Navigation("Comodidades");
+
                     b.Navigation("Direccion");
 
                     b.Navigation("Fotos");

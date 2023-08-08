@@ -48,6 +48,6 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.ReadModel
         public DireccionReadModel? Direccion { get; set; }
         public List<FotoReadModel>? Fotos { get; set; }
         public List<ReglaReadModel>? Reglas { get; set; }
-        //public List<ComodidadReadModel>? Comodidades { get; set; }
+        public List<PropiedadComodidadReadModel>? Comodidades { get; set; }
     }
 }

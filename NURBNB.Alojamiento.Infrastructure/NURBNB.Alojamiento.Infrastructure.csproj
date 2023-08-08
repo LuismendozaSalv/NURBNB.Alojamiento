@@ -25,4 +25,8 @@
     <ProjectReference Include="..\NURBNB.Alojamiento.Application\NURBNB.Alojamiento.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

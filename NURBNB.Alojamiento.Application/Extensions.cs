@@ -12,6 +12,7 @@ namespace NURBNB.Alojamiento.Application
             services.AddSingleton<IPaisFactory, PaisFactory>();
             services.AddSingleton<ICiudadFactory, CiudadFactory>();
             services.AddSingleton<IPropiedadFactory, PropiedadFactory>();
+            services.AddSingleton<IComodidadFactory, ComodidadFactory>();
             return services;
         }
     }

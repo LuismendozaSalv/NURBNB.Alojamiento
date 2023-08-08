@@ -10,6 +10,8 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Context
         public virtual DbSet<CiudadReadModel> Ciudad { set; get; }
         public virtual DbSet<PropiedadReadModel> Propiedad { set; get; }
         public virtual DbSet<DireccionReadModel> Direccion { set; get; }
+        public virtual DbSet<ComodidadReadModel> Comodidad { set; get; }
+        public virtual DbSet<PropiedadComodidadReadModel> PropiedadComodidad { set; get; }
         public ReadDbContext(DbContextOptions<ReadDbContext> options) : base(options)
         {
         }
@@ -37,7 +39,6 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Context
                       .HasForeignKey(e => e.PropiedadId)
                       .IsRequired();
             });
-            //modelBuilder.Entity<PropiedadReadModel>().OwnsMany(x => x.Comodidades);
 
         }
     }

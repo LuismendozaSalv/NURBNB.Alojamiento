@@ -15,8 +15,8 @@ namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
         public IEnumerable<Foto> Fotos => _fotos;
         private readonly IList<Regla> _reglas;
         public IEnumerable<Regla> Reglas => _reglas;
-        //private readonly IList<Comodidad>? _comodidades;
-        //public IEnumerable<Comodidad>? Comodidades => _comodidades;
+        private readonly IList<PropiedadComodidad> _comodidades;
+        public IEnumerable<PropiedadComodidad> Comodidades => _comodidades;
 
         internal Propiedad()
         {
@@ -33,7 +33,7 @@ namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
             Capacidad = capacidad;
             _fotos = new List<Foto>();
             _reglas = new List<Regla>();
-            //_comodidades = new List<Comodidad>();
+            _comodidades = new List<PropiedadComodidad>();
         }
 
         public void AgregarDireccion(string calle, string avenida, string referencia, 
@@ -42,14 +42,16 @@ namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
             Direccion = new Direccion(this.Id, calle, avenida, referencia, latitud, longitud, ciudad);
         }
 
-        //public void AgregarComodidad(Comodidad nuevaComodidad)
-        //{
-        //    if (_comodidades.Any(comodidad => comodidad.Id == nuevaComodidad.Id))
-        //    {
-        //        throw new ArgumentException("La comodidad ya existe");
-        //    }
-        //    _comodidades.Add(nuevaComodidad);
-        //}
+        public void AgregarComodidad(Guid comodidadId)
+        {
+            if (_comodidades.Any(comodidad => comodidad.ComodidadId == comodidadId))
+            {
+               throw new ArgumentException("La comodidad ya existe");
+            }
+
+            PropiedadComodidad propiedadComodidad = new PropiedadComodidad(comodidadId);
+            _comodidades.Add(propiedadComodidad);
+        }
 
         public void AgregarFoto(string url)
         {

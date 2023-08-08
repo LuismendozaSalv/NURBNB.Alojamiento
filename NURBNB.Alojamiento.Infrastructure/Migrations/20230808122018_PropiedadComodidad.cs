@@ -6,11 +6,24 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace NURBNB.Alojamiento.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class PropiedadComodidad : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "comodidad",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    nombre = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    descripcion = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_comodidad", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "pais",
                 columns: table => new
@@ -74,6 +87,31 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
                     table.PrimaryKey("PK_foto", x => x.Id);
                     table.ForeignKey(
                         name: "FK_foto_propiedad_propiedadId",
+                        column: x => x.propiedadId,
+                        principalTable: "propiedad",
+                        principalColumn: "propiedadId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "propiedadComodidad",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    comodidadId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    propiedadId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_propiedadComodidad", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_propiedadComodidad_comodidad_comodidadId",
+                        column: x => x.comodidadId,
+                        principalTable: "comodidad",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_propiedadComodidad_propiedad_propiedadId",
                         column: x => x.propiedadId,
                         principalTable: "propiedad",
                         principalColumn: "propiedadId",
@@ -151,6 +189,16 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
                 column: "propiedadId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_propiedadComodidad_comodidadId",
+                table: "propiedadComodidad",
+                column: "comodidadId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_propiedadComodidad_propiedadId",
+                table: "propiedadComodidad",
+                column: "propiedadId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_regla_propiedadId",
                 table: "regla",
                 column: "propiedadId");
@@ -166,10 +214,16 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
                 name: "foto");
 
             migrationBuilder.DropTable(
+                name: "propiedadComodidad");
+
+            migrationBuilder.DropTable(
                 name: "regla");
 
             migrationBuilder.DropTable(
                 name: "ciudad");
+
+            migrationBuilder.DropTable(
+                name: "comodidad");
 
             migrationBuilder.DropTable(
                 name: "propiedad");

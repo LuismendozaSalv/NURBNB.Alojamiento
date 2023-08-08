@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarComodidadesPropiedad;
 using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarDireccionPropiedad;
 using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarFotos;
 using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarReglasPropiedad;
@@ -47,6 +48,14 @@ namespace NURBNB.Alojamiento.WebAPI.Controllers
         [HttpPost]
         [Route("AgregarReglas")]
         public async Task<IActionResult> AgregarReglas([FromBody] AgregarReglasPropiedadCommand command)
+        {
+            var propiedadId = await _mediator.Send(command);
+            return Ok(propiedadId);
+        }
+
+        [HttpPost]
+        [Route("AgregarComodidades")]
+        public async Task<IActionResult> AgregarComodidades([FromBody] AgregarComodidadesPropiedadCommand command)
         {
             var propiedadId = await _mediator.Send(command);
             return Ok(propiedadId);

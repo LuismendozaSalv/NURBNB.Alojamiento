@@ -22,6 +22,7 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Repositories
         {
             return await _context.Propiedad
                 .Include(x => x.Capacidad)
+                .Include("_comodidades")
                 .Where(x => x.Id == id).AsSplitQuery().FirstOrDefaultAsync();
         }
 

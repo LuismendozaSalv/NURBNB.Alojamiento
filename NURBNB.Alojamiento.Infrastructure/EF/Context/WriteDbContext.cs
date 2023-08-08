@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NURBNB.Alojamiento.Domain.Model.Alojamiento;
 using NURBNB.Alojamiento.Infrastructure.EF.Config;
+using NURBNB.Alojamiento.Infrastructure.EF.ReadModel;
 using Restaurant.SharedKernel.Core;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Context
         public virtual DbSet<Ciudad> Ciudad { set; get; }
         public virtual DbSet<Propiedad> Propiedad { set; get; }
         public virtual DbSet<Direccion> Direccion { set; get; }
+        public virtual DbSet<Comodidad> Comodidad { set; get; }
+        public virtual DbSet<PropiedadComodidad> PropiedadComodidad { set; get; }
 
         public WriteDbContext(DbContextOptions<WriteDbContext> options) : base(options)
         {
@@ -33,6 +36,7 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Context
 
             var propiedadConfig = new PropiedadConfig();
             modelBuilder.ApplyConfiguration<Propiedad>(propiedadConfig);
+            modelBuilder.ApplyConfiguration<PropiedadComodidad>(propiedadConfig);
 
             modelBuilder.Ignore<DomainEvent>();
         }

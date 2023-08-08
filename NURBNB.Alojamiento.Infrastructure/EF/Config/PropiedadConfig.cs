@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace NURBNB.Alojamiento.Infrastructure.EF.Config
 {
     internal class PropiedadConfig : IEntityTypeConfiguration<Propiedad>,
-        IEntityTypeConfiguration<Direccion>
+        IEntityTypeConfiguration<Direccion>, IEntityTypeConfiguration<PropiedadComodidad>
     {
         public void Configure(EntityTypeBuilder<Propiedad> builder)
         {
@@ -74,9 +74,11 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Config
 
             builder.OwnsMany(e => e.Fotos);
             builder.OwnsMany(e => e.Reglas);
+            builder.HasMany(typeof(PropiedadComodidad), "_comodidades");
 
             builder.Ignore("_domainEvents");
             builder.Ignore(x => x.DomainEvents);
+            builder.Ignore(x => x.Comodidades);
         }
 
         public void Configure(EntityTypeBuilder<Direccion> builder)
@@ -101,6 +103,18 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Config
 
             builder.Property(x => x.Longitud)
             .HasColumnName("longitud");
+
+            builder.Ignore("_domainEvents");
+            builder.Ignore(x => x.DomainEvents);
+        }
+
+        public void Configure(EntityTypeBuilder<PropiedadComodidad> builder)
+        {
+            builder.ToTable("propiedadComodidad");
+            builder.HasKey(x => x.Id);
+
+            builder.Property(x => x.Id)
+                .HasColumnName("Id");
 
             builder.Ignore("_domainEvents");
             builder.Ignore(x => x.DomainEvents);

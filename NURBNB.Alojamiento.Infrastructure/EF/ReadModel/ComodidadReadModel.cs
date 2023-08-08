@@ -11,13 +11,18 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.ReadModel
     [Table("comodidad")]
     public class ComodidadReadModel
     {
-        [Required]
-        [Column("propiedadId")]
-        public Guid PropiedadId { get; set; }
+        [Key]
+        [Column("Id")]
+        public Guid Id { get; set; }
 
-        [Column("valor")]
+        [Column("nombre")]
         [StringLength(250)]
         [Required]
-        public string Valor { get; set; }
+        public string Nombre { get; set; }
+
+        [Column("descripcion")]
+        [StringLength(250)]
+        [Required]
+        public string Descripcion { get; set; }
     }
 }
