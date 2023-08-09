@@ -6,7 +6,9 @@ using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarDirecci
 using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarFotos;
 using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarReglasPropiedad;
 using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.CrearAlojamiento;
+using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Query;
 using NURBNB.Alojamiento.Application.UseCases.Ciudad.Command.CrearCiudad;
+using NURBNB.Alojamiento.Application.UseCases.Ciudad.Query;
 
 namespace NURBNB.Alojamiento.WebAPI.Controllers
 {
@@ -59,6 +61,18 @@ namespace NURBNB.Alojamiento.WebAPI.Controllers
         {
             var propiedadId = await _mediator.Send(command);
             return Ok(propiedadId);
+        }
+
+        [HttpGet]
+        [Route("BuscarPropiendadXCiudad")]
+        public async Task<IActionResult> BuscarPropiendadXCiudad(string ciudadTerm = "")
+        {
+            var items = await _mediator.Send(new IGetPropiedadQueryList()
+            {
+                CiudadTerm = ciudadTerm
+            });
+
+            return Ok(items);
         }
     }
 }

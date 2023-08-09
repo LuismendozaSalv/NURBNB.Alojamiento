@@ -2,6 +2,7 @@
 using NURBNB.Alojamiento.Domain.Model.Alojamiento;
 using NURBNB.Alojamiento.Domain.Repositories;
 using NURBNB.Alojamiento.Infrastructure.EF.Context;
+using System.Linq;
 
 namespace NURBNB.Alojamiento.Infrastructure.EF.Repositories
 {
@@ -18,11 +19,23 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Repositories
             await _context.Propiedad.AddAsync(obj);
         }
 
+        public async Task<List<Propiedad?>> FindAll()
+        {
+            return await _context.Propiedad
+                .Include("_comodidades")
+                .Include(x => x.Direccion)
+                    .ThenInclude(direccion => direccion.Ciudad)
+                        .ThenInclude(ciudad => ciudad.Country)
+                    .ToListAsync();
+        }
+
         public async Task<Propiedad?> FindByIdAsync(Guid id)
         {
             return await _context.Propiedad
                 .Include(x => x.Capacidad)
                 .Include("_comodidades")
+                .Include(x => x.Direccion)
+                    .ThenInclude(direccion => direccion.Ciudad)
                 .Where(x => x.Id == id).AsSplitQuery().FirstOrDefaultAsync();
         }
 

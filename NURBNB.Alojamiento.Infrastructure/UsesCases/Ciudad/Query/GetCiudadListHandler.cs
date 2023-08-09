@@ -2,14 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using NURBNB.Alojamiento.Application.Dto;
 using NURBNB.Alojamiento.Application.UseCases.Ciudad.Query;
-using NURBNB.Alojamiento.Application.UseCases.Pais.Query.GetPaisList;
 using NURBNB.Alojamiento.Infrastructure.EF.Context;
 using NURBNB.Alojamiento.Infrastructure.EF.ReadModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Infrastructure.UsesCases.Ciudad.Query
 {
