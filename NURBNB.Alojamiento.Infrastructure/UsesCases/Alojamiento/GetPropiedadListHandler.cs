@@ -30,7 +30,12 @@ namespace NURBNB.Alojamiento.Infrastructure.UsesCases.Alojamiento
 
             if (!string.IsNullOrWhiteSpace(request.CiudadTerm))
             {
-                query = query.Where(x => x.Direccion.Ciudad.Name.Contains(request.CiudadTerm)).ToList();
+                query = query.Where(x => {
+                    if (x.Direccion != null)
+                        return x.Direccion.Ciudad.Name.Contains(request.CiudadTerm);
+                    else
+                        return false;
+                 }).ToList();
             }
 
             return query.ToList();

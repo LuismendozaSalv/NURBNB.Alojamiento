@@ -25,7 +25,6 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Repositories
                 .Include("_comodidades")
                 .Include(x => x.Direccion)
                     .ThenInclude(direccion => direccion.Ciudad)
-                        .ThenInclude(ciudad => ciudad.Country)
                     .ToListAsync();
         }
 
