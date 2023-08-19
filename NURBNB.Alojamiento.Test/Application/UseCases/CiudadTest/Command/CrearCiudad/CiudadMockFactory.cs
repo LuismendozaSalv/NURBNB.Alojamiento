@@ -14,7 +14,7 @@ namespace NURBNB.Alojamiento.Test.Application.UseCases.CiudadTest.Command.CrearC
         {
             var nombreCiudad = "Santa Cruz";
             var pais = new PaisFactory().Crear("Bolivia", "555");
-            var ciudad = new Domain.Model.Alojamiento.Ciudad(nombreCiudad, pais);
+            var ciudad = new Ciudad(nombreCiudad, pais);
             return ciudad;
         }
     }
