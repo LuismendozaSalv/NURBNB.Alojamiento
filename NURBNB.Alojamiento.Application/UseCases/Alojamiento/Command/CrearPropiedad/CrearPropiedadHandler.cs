@@ -6,7 +6,7 @@ using Restaurant.SharedKernel.Core;
 
 namespace NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.CrearAlojamiento
 {
-    internal class CrearPropiedadHandler : IRequestHandler<CrearPropiedadCommand, Guid>
+    public class CrearPropiedadHandler : IRequestHandler<CrearPropiedadCommand, Guid>
     {
         private IPropiedadRepository _propiedadRepository;
         private IPropiedadFactory _propiedadFactory;

@@ -9,7 +9,7 @@ namespace NURBNB.Alojamiento.Domain.Factories
 {
     public interface ICiudadFactory
     {
-        public Ciudad Crear(string nombre, Guid PaisId);
+        public Task<Ciudad> Crear(string nombre, Guid PaisId);
 
     }
 }

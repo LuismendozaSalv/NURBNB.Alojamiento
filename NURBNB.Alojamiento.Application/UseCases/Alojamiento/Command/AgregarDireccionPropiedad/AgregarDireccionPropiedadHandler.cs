@@ -36,7 +36,7 @@ namespace NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarDir
                     propiedad.AgregarDireccion(request.Calle, request.Avenida, request.Referencia, request.Latitud, request.Longitud, ciudad);
                     await _propiedadRepository.UpdateAsync(propiedad);
                     await _unitOfWork.Commit();
-                    return propiedad.Id;
+                    return propiedad.Direccion.Id;
                 }               
             }
             return Guid.NewGuid();

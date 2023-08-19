@@ -8,7 +8,7 @@ namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
         public Pais Country { get; private set; }
 
         private Ciudad() { }
-        internal Ciudad(string name, Pais country)
+        public Ciudad(string name, Pais country)
         {
             Id = Guid.NewGuid();
             Name = name;

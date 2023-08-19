@@ -1,4 +1,5 @@
 ﻿using NURBNB.Alojamiento.Domain.Model.Alojamiento;
+using NURBNB.Alojamiento.Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,16 @@ namespace NURBNB.Alojamiento.Domain.Factories
 {
     public class CiudadFactory : ICiudadFactory
     {
-        public Ciudad Crear(string nombre, Guid PaisId)
+        private IPaisRepository _paisRepository;
+
+        public CiudadFactory(IPaisRepository paisRepository)
         {
-            return new Ciudad(nombre, new Pais("Bolivia", "591"));
+            _paisRepository = paisRepository;
+        }
+        public async Task<Ciudad> Crear(string nombre, Guid PaisId)
+        {
+            var pais = await _paisRepository.FindByIdAsync(PaisId);
+            return new Ciudad(nombre, pais);
         }
     }
 }

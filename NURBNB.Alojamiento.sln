@@ -5,11 +5,13 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NURBNB.Alojamiento.Domain", "NURBNB.Alojamiento.Domain\NURBNB.Alojamiento.Domain.csproj", "{6C3CD1F6-D414-418A-A3B7-EEFB5E9FB94C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NURBNB.Alojamiento.Application", "NURBNB.Alojamiento.Application\NURBNB.Alojamiento.Application.csproj", "{8B560B08-2CC7-4860-825D-82C5AF90C3FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NURBNB.Alojamiento.Application", "NURBNB.Alojamiento.Application\NURBNB.Alojamiento.Application.csproj", "{8B560B08-2CC7-4860-825D-82C5AF90C3FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NURBNB.Alojamiento.Infrastructure", "NURBNB.Alojamiento.Infrastructure\NURBNB.Alojamiento.Infrastructure.csproj", "{1276D916-1F71-47F4-85E6-50F4EF852447}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NURBNB.Alojamiento.Infrastructure", "NURBNB.Alojamiento.Infrastructure\NURBNB.Alojamiento.Infrastructure.csproj", "{1276D916-1F71-47F4-85E6-50F4EF852447}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NURBNB.Alojamiento.WebAPI", "NURBNB.Alojamiento.WebAPI\NURBNB.Alojamiento.WebAPI.csproj", "{5BE16853-5FE6-49C7-8EC8-48793856EE7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NURBNB.Alojamiento.WebAPI", "NURBNB.Alojamiento.WebAPI\NURBNB.Alojamiento.WebAPI.csproj", "{5BE16853-5FE6-49C7-8EC8-48793856EE7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NURBNB.Alojamiento.Test", "NURBNB.Alojamiento.Test\NURBNB.Alojamiento.Test.csproj", "{E261A0C6-18C5-42DA-9537-29CFA24EF3E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{5BE16853-5FE6-49C7-8EC8-48793856EE7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BE16853-5FE6-49C7-8EC8-48793856EE7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BE16853-5FE6-49C7-8EC8-48793856EE7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E261A0C6-18C5-42DA-9537-29CFA24EF3E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E261A0C6-18C5-42DA-9537-29CFA24EF3E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E261A0C6-18C5-42DA-9537-29CFA24EF3E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E261A0C6-18C5-42DA-9537-29CFA24EF3E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -30,11 +30,11 @@ namespace NURBNB.Alojamiento.Application.UseCases.Ciudad.Command.CrearCiudad
         {
             var ciudadCreada = _ciudadFactory.Crear(request.Nombre, request.PaisId);
 
-            await _ciudadRepository.CreateAsync(ciudadCreada);
+            await _ciudadRepository.CreateAsync(ciudadCreada.Result);
 
             await _unitOfWork.Commit();
 
-            return ciudadCreada.Id;
+            return ciudadCreada.Result.Id;
         }
     }
 }
