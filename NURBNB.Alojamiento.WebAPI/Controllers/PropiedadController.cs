@@ -27,40 +27,75 @@ namespace NURBNB.Alojamiento.WebAPI.Controllers
         [Route("CrearPropiedad")]
         public async Task<IActionResult> CrearPropiedad([FromBody] CrearPropiedadCommand command)
         {
-            var propiedadId = await _mediator.Send(command);
-            return Ok(propiedadId);
+            try
+            {
+                var propiedadId = await _mediator.Send(command);
+                return Ok(propiedadId);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]
         [Route("AgregarDireccion")]
         public async Task<IActionResult> AgregarDireccion([FromBody] AgregarDireccionPropiedadCommand command)
         {
-            var propiedadId = await _mediator.Send(command);
-            return Ok(propiedadId);
+            try
+            {
+                var propiedadId = await _mediator.Send(command);
+                return Ok(propiedadId);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]
         [Route("AgregarFotos")]
         public async Task<IActionResult> AgregarFotos([FromBody] AgregarFotosPropiedadCommand command)
         {
-            var propiedadId = await _mediator.Send(command);
-            return Ok(propiedadId);
+            try
+            {
+                var propiedadId = await _mediator.Send(command);
+                return Ok(propiedadId);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]
         [Route("AgregarReglas")]
         public async Task<IActionResult> AgregarReglas([FromBody] AgregarReglasPropiedadCommand command)
         {
-            var propiedadId = await _mediator.Send(command);
-            return Ok(propiedadId);
+            try
+            {
+                var propiedadId = await _mediator.Send(command);
+                return Ok(propiedadId);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]
         [Route("AgregarComodidades")]
         public async Task<IActionResult> AgregarComodidades([FromBody] AgregarComodidadesPropiedadCommand command)
         {
-            var propiedadId = await _mediator.Send(command);
-            return Ok(propiedadId);
+            try
+            {
+                var propiedadId = await _mediator.Send(command);
+                return Ok(propiedadId);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet]

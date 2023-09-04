@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using NURBNB.Alojamiento.Application.Dto;
+using NURBNB.Alojamiento.Application.Dto.Propiedad;
 using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Query;
 using NURBNB.Alojamiento.Application.UseCases.Pais.Query.GetPaisList;
 using NURBNB.Alojamiento.Domain.Model.Alojamiento;
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Infrastructure.UsesCases.Alojamiento
 {
-    internal class GetPropiedadListHandler : IRequestHandler<IGetPropiedadQueryList, ICollection<Propiedad>>
+    internal class GetPropiedadListHandler : IRequestHandler<IGetPropiedadQueryList, ICollection<PropiedadDto>>
     {
         private IPropiedadRepository _propiedadRepository;
 
@@ -24,21 +25,17 @@ namespace NURBNB.Alojamiento.Infrastructure.UsesCases.Alojamiento
             _propiedadRepository = propiedadRepository;
         }
         
-        public async Task<ICollection<Propiedad>> Handle(IGetPropiedadQueryList request, CancellationToken cancellationToken)
+        public async Task<ICollection<PropiedadDto>> Handle(IGetPropiedadQueryList request, CancellationToken cancellationToken)
         {
-            var query = await _propiedadRepository.FindAll();
-
+            
             if (!string.IsNullOrWhiteSpace(request.CiudadTerm))
             {
-                query = query.Where(x => {
-                    if (x.Direccion != null)
-                        return x.Direccion.Ciudad.Name.Contains(request.CiudadTerm);
-                    else
-                        return false;
-                 }).ToList();
+                var propiedades = _propiedadRepository.FindByCityName(request.CiudadTerm).Result;
+                var propiedadesDTO = propiedades.Select(propiedad => MapperPropiedadDto.MapToPropiedadDto(propiedad)).ToList();
+                return propiedadesDTO;
             }
 
-            return query.ToList();
+            return new List<PropiedadDto>();
         }
     }
 }

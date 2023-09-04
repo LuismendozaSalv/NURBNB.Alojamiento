@@ -19,12 +19,28 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Repositories
             await _context.Propiedad.AddAsync(obj);
         }
 
-        public async Task<List<Propiedad?>> FindAll()
+        public async Task<List<Propiedad>> FindAll()
         {
             return await _context.Propiedad
                 .Include("_comodidades")
                 .Include(x => x.Direccion)
                     .ThenInclude(direccion => direccion.Ciudad)
+                    .ToListAsync();
+        }
+
+        public async Task<List<Propiedad>> FindByCityName(string cityName)
+        {
+            return await _context.Propiedad
+                .Include(x => x.Direccion)
+                    .ThenInclude(direccion => direccion.Ciudad)
+                    .Where(propiedad => propiedad.Direccion.Ciudad.Name.ToLower().Contains(cityName.ToLower()))
+                    .ToListAsync();
+        }
+
+        public async Task<List<Propiedad>> FindByIds(List<Guid> ids)
+        {
+            return await _context.Propiedad
+                    .Where(p => ids.Contains(p.Id))
                     .ToListAsync();
         }
 

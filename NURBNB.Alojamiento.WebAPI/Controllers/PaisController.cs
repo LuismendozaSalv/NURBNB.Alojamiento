@@ -18,8 +18,16 @@ namespace NURBNB.Alojamiento.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CrearPaisCommand command)
         {
-            var paisId = await _mediator.Send(command);
-            return Ok(paisId);
+            try
+            {
+                var paisId = await _mediator.Send(command);
+                return Ok(paisId);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+
+            }
         }
 
         [HttpGet]

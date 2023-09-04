@@ -10,7 +10,9 @@ namespace NURBNB.Alojamiento.Domain.Repositories
 {
     public interface IPropiedadRepository : IRepository<Propiedad, Guid>
     {
-        Task<List<Propiedad?>> FindAll();
+        Task<List<Propiedad>> FindAll();
+        Task<List<Propiedad>> FindByCityName(string cityName);
+        Task<List<Propiedad>> FindByIds(List<Guid> ids);
         Task UpdateAsync(Propiedad Propiedad);
     }
 }

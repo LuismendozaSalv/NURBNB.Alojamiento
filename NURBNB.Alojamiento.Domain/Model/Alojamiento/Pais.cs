@@ -13,6 +13,8 @@ namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
 
         public Pais(string name, string countryCode)
         {
+            if (String.IsNullOrEmpty(name)) throw new ArgumentException("El nombre no puede estar vacío");
+            if (String.IsNullOrEmpty(countryCode)) throw new ArgumentException("El código no puede estar vacío");
             Id = Guid.NewGuid();
             Name = name;
             CountryCode = countryCode;

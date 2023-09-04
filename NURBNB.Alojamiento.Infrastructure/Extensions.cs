@@ -43,6 +43,7 @@ namespace NURBNB.Alojamiento.Infrastructure
             services.AddScoped<ICiudadRepository, CiudadRepository>();
             services.AddScoped<IPropiedadRepository, PropiedadRepository>();
             services.AddScoped<IComodidadRepository, ComodidadRepository>();
+            services.AddScoped<IDireccionRepository, DireccionRepository>();
             services.AddScoped<IPropiedadComodidadRepository, PropiedadComodidadRepository>();
 
             using var scope = services.BuildServiceProvider().CreateScope();

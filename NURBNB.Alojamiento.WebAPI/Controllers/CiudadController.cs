@@ -20,8 +20,15 @@ namespace NURBNB.Alojamiento.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CrearCiudadCommand command)
         {
-            var ciudadId = await _mediator.Send(command);
-            return Ok(ciudadId);
+            try
+            {
+                var ciudadId = await _mediator.Send(command);
+                return Ok(ciudadId);
+            } catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
 
         [HttpGet]

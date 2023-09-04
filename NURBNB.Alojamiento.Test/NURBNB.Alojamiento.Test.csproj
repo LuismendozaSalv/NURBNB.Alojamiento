@@ -27,4 +27,8 @@
     <ProjectReference Include="..\NURBNB.Alojamiento.Application\NURBNB.Alojamiento.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Application\UseCases\PaisTest\Command\" />
+  </ItemGroup>
+
 </Project>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NURBNB.Alojamiento.Domain.Factories;
+using NURBNB.Alojamiento.Domain.Repositories;
 using System.Reflection;
 
 namespace NURBNB.Alojamiento.Application
@@ -10,7 +11,7 @@ namespace NURBNB.Alojamiento.Application
         {
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
             services.AddSingleton<IPaisFactory, PaisFactory>();
-            services.AddSingleton<ICiudadFactory, CiudadFactory>();
+            services.AddScoped<ICiudadFactory, CiudadFactory>();
             services.AddSingleton<IPropiedadFactory, PropiedadFactory>();
             services.AddSingleton<IComodidadFactory, ComodidadFactory>();
             return services;
