@@ -58,7 +58,69 @@ namespace NURBNB.Alojamiento.Test.Application.UseCases.AlojamientoTest.Command.A
             var direccionId = handler.Handle(evento, tcs.Token);
 
             Assert.NotNull(direccionId.Result);
+        }
 
+        [Fact]
+        public void AgregarDireccionAPropiedadNoExistente()
+        {
+            var ciudad = CiudadMockFactory.getCiudad();
+            var propiedad = PropiedadMockFactory.getPropiedadApartamento();
+            var direccion = DireccionMockFactory.addDireccion(propiedad, ciudad).Direccion;
+            _ciudadRepository.Setup(_ciudadRepository => _ciudadRepository.FindByIdAsync(ciudad.Id))
+                .ReturnsAsync(ciudad);
+
+            var handler = new AgregarDireccionPropiedadHandler(
+                _propiedadRepository.Object,
+                _ciudadRepository.Object,
+                _unitOfWork.Object
+            );
+            var tcs = new CancellationTokenSource(1000);
+            AgregarDireccionPropiedadCommand evento = new AgregarDireccionPropiedadCommand
+            {
+                Avenida = direccion.Avenida,
+                Calle = direccion.Calle,
+                Latitud = direccion.Latitud,
+                Longitud = direccion.Longitud,
+                Referencia = direccion.Referencia,
+                PropiedadId = propiedad.Id,
+                CiudadId = ciudad.Id,
+            };
+
+            var direccionId = handler.Handle(evento, tcs.Token);
+
+            Assert.NotEqual(propiedad.Direccion.Id, direccionId.Result);
+
+        }
+
+        [Fact]
+        public void AgregarDireccionAPropiedadConCiudadNoExistente()
+        {
+            var ciudad = CiudadMockFactory.getCiudad();
+            var propiedad = PropiedadMockFactory.getPropiedadApartamento();
+            var direccion = DireccionMockFactory.addDireccion(propiedad, ciudad).Direccion;
+            _propiedadRepository.Setup(_propiedadRepository => _propiedadRepository.FindByIdAsync(propiedad.Id))
+                .ReturnsAsync(propiedad);
+
+            var handler = new AgregarDireccionPropiedadHandler(
+                _propiedadRepository.Object,
+                _ciudadRepository.Object,
+                _unitOfWork.Object
+            );
+            var tcs = new CancellationTokenSource(1000);
+            AgregarDireccionPropiedadCommand evento = new AgregarDireccionPropiedadCommand
+            {
+                Avenida = direccion.Avenida,
+                Calle = direccion.Calle,
+                Latitud = direccion.Latitud,
+                Longitud = direccion.Longitud,
+                Referencia = direccion.Referencia,
+                PropiedadId = propiedad.Id,
+                CiudadId = ciudad.Id,
+            };
+
+            var direccionId = handler.Handle(evento, tcs.Token);
+
+            Assert.NotEqual(propiedad.Direccion.Id, direccionId.Result);
         }
     }
 }

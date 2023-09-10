@@ -22,7 +22,7 @@ namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
         {
             
         }
-        internal Propiedad(string titulo, string descripcion, TipoPropiedad tipoPropiedad, 
+        public Propiedad(string titulo, string descripcion, TipoPropiedad tipoPropiedad, 
             decimal precio, Capacidad capacidad)
         {
             Id = Guid.NewGuid();

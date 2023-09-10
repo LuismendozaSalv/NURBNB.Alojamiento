@@ -30,6 +30,7 @@ namespace NURBNB.Alojamiento.Infrastructure.UsesCases.Alojamiento
             
             if (!string.IsNullOrWhiteSpace(request.CiudadTerm))
             {
+                
                 var propiedades = _propiedadRepository.FindByCityName(request.CiudadTerm).Result;
                 var propiedadesDTO = propiedades.Select(propiedad => MapperPropiedadDto.MapToPropiedadDto(propiedad)).ToList();
                 return propiedadesDTO;

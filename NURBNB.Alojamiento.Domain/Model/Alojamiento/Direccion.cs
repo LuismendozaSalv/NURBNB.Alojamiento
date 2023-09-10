@@ -18,7 +18,7 @@ namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
         {
 
         }
-        internal Direccion(Guid propiedadId, string calle, string avenida, string referencia, 
+        public Direccion(Guid propiedadId, string calle, string avenida, string referencia, 
             double latitud, double longitud, Ciudad ciudad)
         {
             CheckRule(new StringNotNullOrEmptyRule(calle));
