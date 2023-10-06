@@ -64,24 +64,30 @@ namespace NURBNB.Alojamiento.Infrastructure
         {
             using var scope = services.BuildServiceProvider().CreateScope();
             var context = scope.ServiceProvider.GetRequiredService<WriteDbContext>();
-            if (!context.Pais.Any())
+            try
             {
-                var jsonData = File.ReadAllText("../NURBNB.Alojamiento.Infrastructure/EF/Json/PaisesCiudades.json");
-                var paisesCiudades = JsonConvert.DeserializeObject<PaisCiudadesDto>(jsonData);
-                List<Pais> paises = new List<Pais>();
-                foreach (var paisDto in paisesCiudades.data)
+                if (!context.Pais.Any())
                 {
-                    Pais pais = new Pais(paisDto.country, paisDto.iso2);
-                    foreach (var ciudadNombre in paisDto.cities)
+                    var jsonData = File.ReadAllText("../NURBNB.Alojamiento.Infrastructure/EF/Json/PaisesCiudades.json");
+                    var paisesCiudades = JsonConvert.DeserializeObject<PaisCiudadesDto>(jsonData);
+                    List<Pais> paises = new List<Pais>();
+                    foreach (var paisDto in paisesCiudades.data)
                     {
-                        pais.AgregarCiudad(ciudadNombre);
+                        Pais pais = new Pais(paisDto.country, paisDto.iso2);
+                        foreach (var ciudadNombre in paisDto.cities)
+                        {
+                            pais.AgregarCiudad(ciudadNombre);
+                        }
+                        paises.Add(pais);
+                        context.Ciudad.AddRange(pais.Ciudades);
                     }
-                    paises.Add(pais);
-                    context.Ciudad.AddRange(pais.Ciudades);
+                    context.Pais.AddRange(paises);
+                    context.SaveChanges();
                 }
-                context.Pais.AddRange(paises);
-                context.SaveChanges();
-            }
+            }catch (Exception ex)
+            {
+
+            }          
         }
     }
 }

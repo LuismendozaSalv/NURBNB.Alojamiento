@@ -1,0 +1,19 @@
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+WORKDIR /app
+EXPOSE 80
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["NURBNB.Alojamiento.WebAPI/NURBNB.Alojamiento.WebAPI.csproj", "NURBNB.Alojamiento.WebAPI/"]
+RUN dotnet restore "NURBNB.Alojamiento.WebAPI/NURBNB.Alojamiento.WebAPI.csproj"
+COPY . .
+WORKDIR "/src/NURBNB.Alojamiento.WebAPI"
+RUN dotnet build "NURBNB.Alojamiento.WebAPI.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "NURBNB.Alojamiento.WebAPI.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "NURBNB.Alojamiento.WebAPI.dll"]
