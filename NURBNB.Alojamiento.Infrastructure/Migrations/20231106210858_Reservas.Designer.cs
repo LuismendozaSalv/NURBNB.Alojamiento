@@ -12,8 +12,8 @@ using NURBNB.Alojamiento.Infrastructure.EF.Context;
 namespace NURBNB.Alojamiento.Infrastructure.Migrations
 {
     [DbContext(typeof(ReadDbContext))]
-    [Migration("20230808122018_PropiedadComodidad")]
-    partial class PropiedadComodidad
+    [Migration("20231106210858_Reservas")]
+    partial class Reservas
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -266,6 +266,38 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
                     b.ToTable("regla");
                 });
 
+            modelBuilder.Entity("NURBNB.Alojamiento.Infrastructure.EF.ReadModel.ReservaReadModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
+
+                    b.Property<string>("EstadoReserva")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)")
+                        .HasColumnName("estadoReserva");
+
+                    b.Property<DateTime>("FechaEntrada")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("fechaEntrada");
+
+                    b.Property<DateTime>("FechaSalida")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("fechaSalida");
+
+                    b.Property<Guid>("PropiedadId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("propiedadId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PropiedadId");
+
+                    b.ToTable("reserva");
+                });
+
             modelBuilder.Entity("NURBNB.Alojamiento.Infrastructure.EF.ReadModel.CiudadReadModel", b =>
                 {
                     b.HasOne("NURBNB.Alojamiento.Infrastructure.EF.ReadModel.PaisReadModel", "Pais")
@@ -333,6 +365,15 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("NURBNB.Alojamiento.Infrastructure.EF.ReadModel.ReservaReadModel", b =>
+                {
+                    b.HasOne("NURBNB.Alojamiento.Infrastructure.EF.ReadModel.PropiedadReadModel", null)
+                        .WithMany("Reservas")
+                        .HasForeignKey("PropiedadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("NURBNB.Alojamiento.Infrastructure.EF.ReadModel.PropiedadReadModel", b =>
                 {
                     b.Navigation("Comodidades");
@@ -342,6 +383,8 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
                     b.Navigation("Fotos");
 
                     b.Navigation("Reglas");
+
+                    b.Navigation("Reservas");
                 });
 #pragma warning restore 612, 618
         }

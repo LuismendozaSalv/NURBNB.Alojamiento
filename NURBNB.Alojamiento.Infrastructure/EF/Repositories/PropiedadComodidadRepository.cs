@@ -1,4 +1,4 @@
-﻿using NURBNB.Alojamiento.Domain.Model.Alojamiento;
+﻿ using NURBNB.Alojamiento.Domain.Model.Alojamiento;
 using NURBNB.Alojamiento.Domain.Repositories;
 using NURBNB.Alojamiento.Infrastructure.EF.Context;
 using System;

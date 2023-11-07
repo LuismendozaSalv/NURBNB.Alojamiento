@@ -1,13 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NURBNB.Alojamiento.Domain.Model.Alojamiento;
 using NURBNB.Alojamiento.Infrastructure.EF.Config;
 using NURBNB.Alojamiento.Infrastructure.EF.ReadModel;
 using Restaurant.SharedKernel.Core;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace NURBNB.Alojamiento.Infrastructure.EF.Context
 {

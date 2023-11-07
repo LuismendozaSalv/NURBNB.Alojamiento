@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NURBNB.Alojamiento.Domain.Model.Alojamiento;
 using NURBNB.Alojamiento.Infrastructure.EF.ReadModel;
 
@@ -35,6 +36,16 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Context
                 entity.HasKey(e => e.Id);
 
                 entity.HasMany(e => e.Reglas)
+                      .WithOne()
+                      .HasForeignKey(e => e.PropiedadId)
+                      .IsRequired();
+            });
+
+            modelBuilder.Entity<PropiedadReadModel>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.HasMany(e => e.Reservas)
                       .WithOne()
                       .HasForeignKey(e => e.PropiedadId)
                       .IsRequired();

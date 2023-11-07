@@ -74,8 +74,19 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Config
 
             builder.OwnsMany(e => e.Fotos);
             builder.OwnsMany(e => e.Reglas);
+            var estadoConverter = new ValueConverter<EstadoReserva, string>(
+                tipoEnumValue => tipoEnumValue.ToString(),
+                tipo => (EstadoReserva)Enum.Parse(typeof(EstadoReserva), tipo)
+            );
+            builder.OwnsMany(e => e.Reservas, reserva =>
+            {
+                reserva.Property(r => r.EstadoReserva)
+                 .HasConversion(estadoConverter)
+                 .HasColumnName("estadoReserva")
+                 .HasMaxLength(20)
+                 .IsRequired();
+            });
             builder.HasMany(typeof(PropiedadComodidad), "_comodidades");
-
             builder.Ignore("_domainEvents");
             builder.Ignore(x => x.DomainEvents);
             builder.Ignore(x => x.Comodidades);
@@ -119,5 +130,6 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Config
             builder.Ignore("_domainEvents");
             builder.Ignore(x => x.DomainEvents);
         }
+
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace NURBNB.Alojamiento.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class PropiedadComodidad : Migration
+    public partial class Reservas : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -138,6 +138,27 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "reserva",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    propiedadId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    fechaEntrada = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    fechaSalida = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    estadoReserva = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_reserva", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_reserva_propiedad_propiedadId",
+                        column: x => x.propiedadId,
+                        principalTable: "propiedad",
+                        principalColumn: "propiedadId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "direccion",
                 columns: table => new
                 {
@@ -202,6 +223,11 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
                 name: "IX_regla_propiedadId",
                 table: "regla",
                 column: "propiedadId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_reserva_propiedadId",
+                table: "reserva",
+                column: "propiedadId");
         }
 
         /// <inheritdoc />
@@ -218,6 +244,9 @@ namespace NURBNB.Alojamiento.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "regla");
+
+            migrationBuilder.DropTable(
+                name: "reserva");
 
             migrationBuilder.DropTable(
                 name: "ciudad");

@@ -17,6 +17,8 @@ namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
         public IEnumerable<Regla> Reglas => _reglas;
         private readonly IList<PropiedadComodidad> _comodidades;
         public IEnumerable<PropiedadComodidad> Comodidades => _comodidades;
+        private readonly IList<Reserva> _reservas;
+        public IEnumerable<Reserva> Reservas => _reservas;
 
         internal Propiedad()
         {
@@ -34,6 +36,7 @@ namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
             _fotos = new List<Foto>();
             _reglas = new List<Regla>();
             _comodidades = new List<PropiedadComodidad>();
+            _reservas = new List<Reserva>();
         }
 
         public void AgregarDireccion(string calle, string avenida, string referencia, 
@@ -69,6 +72,15 @@ namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
                 throw new ArgumentException("La regla ya existe");
             }
             _reglas.Add(regla);
+        }
+
+        public void AgregarReserva(Reserva reserva)
+        {
+            if (_reservas.Any(reservaObj => reservaObj.Id == reserva.Id))
+            {
+                throw new ArgumentException("La reserva ya existe");
+            }
+            _reservas.Add(reserva);
         }
     }
 }

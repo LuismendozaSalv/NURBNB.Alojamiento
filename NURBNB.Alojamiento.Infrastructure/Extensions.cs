@@ -52,6 +52,7 @@ namespace NURBNB.Alojamiento.Infrastructure
                 var context = scope.ServiceProvider.GetRequiredService<ReadDbContext>();
                 context.Database.Migrate();
             }
+
             var readContext = scope.ServiceProvider.GetRequiredService<ReadDbContext>();
             if (!readContext.Database.GetPendingMigrations().Any() && 
                 readContext.Database.GetMigrations().Any())

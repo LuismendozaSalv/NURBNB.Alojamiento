@@ -5,6 +5,7 @@ using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarComodid
 using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarDireccionPropiedad;
 using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarFotos;
 using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarReglasPropiedad;
+using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarReservaPropiedad;
 using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.CrearAlojamiento;
 using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Query;
 using NURBNB.Alojamiento.Application.UseCases.Ciudad.Command.CrearCiudad;
@@ -98,13 +99,42 @@ namespace NURBNB.Alojamiento.WebAPI.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("AgregarReserva")]
+        public async Task<IActionResult> AgregarReserva([FromBody] AgregarReservaPropiedadCommand command)
+        {
+            try
+            {
+                var propiedadId = await _mediator.Send(command);
+                return Ok(propiedadId);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet]
-        [Route("BuscarPropiendadXCiudad")]
-        public async Task<IActionResult> BuscarPropiendadXCiudad(string ciudadTerm = "")
+        [Route("BuscarPropiedadXCiudad")]
+        public async Task<IActionResult> BuscarPropiedadXCiudad(string? ciudadTerm = "")
         {
             var items = await _mediator.Send(new IGetPropiedadQueryList()
             {
                 CiudadTerm = ciudadTerm
+            });
+
+            return Ok(items);
+        }
+
+        [HttpGet]
+        [Route("BuscarPropiedad")]
+        public async Task<IActionResult> BuscarPropiedad(Guid ciudadId, DateTime fechaEntrada, DateTime fechaSalida)
+        {
+            var items = await _mediator.Send(new IGetFilterPropiedadQueryList()
+            {
+                CiudadId = ciudadId,
+                FechaEntrada = fechaEntrada,
+                FechaSalida = fechaSalida
             });
 
             return Ok(items);

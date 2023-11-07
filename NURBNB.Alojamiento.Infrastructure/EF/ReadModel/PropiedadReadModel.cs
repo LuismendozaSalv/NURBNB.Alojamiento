@@ -49,5 +49,6 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.ReadModel
         public List<FotoReadModel>? Fotos { get; set; }
         public List<ReglaReadModel>? Reglas { get; set; }
         public List<PropiedadComodidadReadModel>? Comodidades { get; set; }
+        public List<ReservaReadModel>? Reservas { get; set; }
     }
 }

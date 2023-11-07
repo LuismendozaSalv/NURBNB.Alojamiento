@@ -6,6 +6,7 @@
         {
             return new PropiedadDto
             {
+               Id = propiedad.Id,
                Titulo = propiedad.Titulo,
                Descripcion = propiedad.Descripcion,
                Precio = propiedad.Precio,

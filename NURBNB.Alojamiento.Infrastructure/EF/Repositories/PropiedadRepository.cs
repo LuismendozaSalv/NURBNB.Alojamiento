@@ -37,6 +37,21 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Repositories
                     .ToListAsync();
         }
 
+        public async Task<List<Propiedad>> FindByFilters(Guid ciudadId, DateTime fechaEntrada, DateTime fechaSalida)
+        {
+            var propiedades = _context.Propiedad
+                .Include(x => x.Reservas)
+                .Include(x => x.Direccion)
+                    .ThenInclude(direccion => direccion.Ciudad)
+                    .Where(propiedad => propiedad.Direccion.Ciudad.Id == ciudadId)
+                    .ToList();
+            var propiedadesDisponibles = propiedades
+            .Where(propiedad => propiedad.Reservas.All(reserva =>
+                fechaEntrada >= reserva.FechaSalida || fechaSalida <= reserva.FechaEntrada))
+            .ToList();
+            return propiedadesDisponibles;
+        }
+
         public async Task<List<Propiedad>> FindByIds(List<Guid> ids)
         {
             return await _context.Propiedad
