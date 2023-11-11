@@ -74,5 +74,11 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Repositories
             _context.Propiedad.Update(Propiedad);
             return Task.CompletedTask;
         }
+
+        public Task<Propiedad> FindByReserva(Guid reservaId)
+        {
+            var propiedadAsociada = _context.Propiedad.FirstOrDefaultAsync(propiedad => propiedad.Reservas.Any(reserva => reserva.Id == reservaId));
+            return propiedadAsociada;
+        }
     }
 }

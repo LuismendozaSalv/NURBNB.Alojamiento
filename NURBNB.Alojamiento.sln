@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NURBNB.Alojamiento.Infrastr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NURBNB.Alojamiento.WebAPI", "NURBNB.Alojamiento.WebAPI\NURBNB.Alojamiento.WebAPI.csproj", "{5BE16853-5FE6-49C7-8EC8-48793856EE7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NURBNB.Alojamiento.Test", "NURBNB.Alojamiento.Test\NURBNB.Alojamiento.Test.csproj", "{E261A0C6-18C5-42DA-9537-29CFA24EF3E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NURBNB.Alojamiento.Test", "NURBNB.Alojamiento.Test\NURBNB.Alojamiento.Test.csproj", "{E261A0C6-18C5-42DA-9537-29CFA24EF3E5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NURBNB.IntegrationEvents", "..\NURBNB.IntegrationEvents\NURBNB.IntegrationEvents\NURBNB.IntegrationEvents.csproj", "{5F3C4169-92F3-4F94-8209-5D67615B5FB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{E261A0C6-18C5-42DA-9537-29CFA24EF3E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E261A0C6-18C5-42DA-9537-29CFA24EF3E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E261A0C6-18C5-42DA-9537-29CFA24EF3E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F3C4169-92F3-4F94-8209-5D67615B5FB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F3C4169-92F3-4F94-8209-5D67615B5FB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F3C4169-92F3-4F94-8209-5D67615B5FB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F3C4169-92F3-4F94-8209-5D67615B5FB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

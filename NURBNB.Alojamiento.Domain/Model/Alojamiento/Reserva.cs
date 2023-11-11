@@ -24,5 +24,10 @@ namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
             FechaSalida = fechaSalida;
             EstadoReserva = estado;
         }
+
+        public void Editar(EstadoReserva estado)
+        {
+            EstadoReserva = estado;
+        }
     }
 }

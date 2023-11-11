@@ -12,7 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\NURBNB.IntegrationEvents\NURBNB.IntegrationEvents\NURBNB.IntegrationEvents.csproj" />
     <ProjectReference Include="..\NURBNB.Alojamiento.Domain\NURBNB.Alojamiento.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="EventHandler\" />
   </ItemGroup>
 
 </Project>

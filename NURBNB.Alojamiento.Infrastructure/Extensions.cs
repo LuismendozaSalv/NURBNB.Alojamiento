@@ -1,14 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MassTransit;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using NURBNB.Alojamiento.Application;
 using NURBNB.Alojamiento.Application.Dto;
+using NURBNB.Alojamiento.Application.Services;
 using NURBNB.Alojamiento.Domain.Model.Alojamiento;
 using NURBNB.Alojamiento.Domain.Repositories;
 using NURBNB.Alojamiento.Infrastructure.EF;
 using NURBNB.Alojamiento.Infrastructure.EF.Context;
 using NURBNB.Alojamiento.Infrastructure.EF.Repositories;
+using NURBNB.Alojamiento.Infrastructure.MassTransit;
+using NURBNB.Alojamiento.Infrastructure.MassTransit.Consumers;
+using NURBNB.IntegrationEvents;
 using Restaurant.SharedKernel.Core;
 using System.IO;
 using System.Reflection;
@@ -24,6 +29,7 @@ namespace NURBNB.Alojamiento.Infrastructure
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             AddDatabase(services, configuration, isDevelopment);
+            AddMassTransitWithRabbitMq(services, configuration); 
             return services;
         }
 
@@ -89,6 +95,32 @@ namespace NURBNB.Alojamiento.Infrastructure
             {
 
             }          
+        }
+
+        private static IServiceCollection AddMassTransitWithRabbitMq(IServiceCollection services, IConfiguration configuration)
+        {
+            //services.AddScoped<IBusService, MassTransitBusService>();
+
+            var serviceName = configuration.GetValue<string>("ServiceName");
+            var rabbitMQSettings = configuration.GetSection(nameof(RabbitMQSettings)).Get<RabbitMQSettings>();
+
+            services.AddMassTransit(configure =>
+            {
+                configure.AddConsumer<ReservaFinalizadaConsumer>();
+
+                configure.UsingRabbitMq((context, configurator) =>
+                {
+
+                    configurator.Host(rabbitMQSettings.Host);
+                    configurator.ConfigureEndpoints(context, new KebabCaseEndpointNameFormatter(serviceName, false));
+                    configurator.UseMessageRetry(retryConfigurator =>
+                    {
+                        retryConfigurator.Interval(3, TimeSpan.FromSeconds(5));
+                    });
+                });
+            });
+
+            return services;
         }
     }
 }

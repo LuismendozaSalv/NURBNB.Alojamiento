@@ -7,6 +7,7 @@ using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarFotos;
 using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarReglasPropiedad;
 using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarReservaPropiedad;
 using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.CrearAlojamiento;
+using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.ModificarReservaPropiedad;
 using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Query;
 using NURBNB.Alojamiento.Application.UseCases.Ciudad.Command.CrearCiudad;
 using NURBNB.Alojamiento.Application.UseCases.Ciudad.Query;
@@ -102,6 +103,21 @@ namespace NURBNB.Alojamiento.WebAPI.Controllers
         [HttpPost]
         [Route("AgregarReserva")]
         public async Task<IActionResult> AgregarReserva([FromBody] AgregarReservaPropiedadCommand command)
+        {
+            try
+            {
+                var propiedadId = await _mediator.Send(command);
+                return Ok(propiedadId);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("ModificarReserva")]
+        public async Task<IActionResult> ModificarReserva([FromBody] ModificarReservaPropiedadCommand command)
         {
             try
             {
