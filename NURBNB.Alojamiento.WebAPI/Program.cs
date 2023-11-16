@@ -32,7 +32,7 @@ if (app.Environment.IsDevelopment())
 }
 
 //app.UseHttpsRedirection();
-
+app.UseConsul(builder.Configuration);
 app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthorization();
 

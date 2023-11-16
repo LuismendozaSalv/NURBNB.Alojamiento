@@ -1,19 +1,23 @@
-﻿using MassTransit;
+﻿using Consul;
+using MassTransit;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using NURBNB.Alojamiento.Application;
 using NURBNB.Alojamiento.Application.Dto;
 using NURBNB.Alojamiento.Application.Services;
 using NURBNB.Alojamiento.Domain.Model.Alojamiento;
 using NURBNB.Alojamiento.Domain.Repositories;
+using NURBNB.Alojamiento.Infrastructure.Consul;
 using NURBNB.Alojamiento.Infrastructure.EF;
 using NURBNB.Alojamiento.Infrastructure.EF.Context;
 using NURBNB.Alojamiento.Infrastructure.EF.Repositories;
 using NURBNB.Alojamiento.Infrastructure.MassTransit;
 using NURBNB.Alojamiento.Infrastructure.MassTransit.Consumers;
-using NURBNB.IntegrationEvents;
 using Restaurant.SharedKernel.Core;
 using System.IO;
 using System.Reflection;
@@ -27,7 +31,7 @@ namespace NURBNB.Alojamiento.Infrastructure
         {
             services.AddApplicaction();
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-
+            services.AddConsulConfig(configuration);
             AddDatabase(services, configuration, isDevelopment);
             AddMassTransitWithRabbitMq(services, configuration); 
             return services;
@@ -73,9 +77,10 @@ namespace NURBNB.Alojamiento.Infrastructure
             var context = scope.ServiceProvider.GetRequiredService<WriteDbContext>();
             try
             {
+                var jsonData1 = File.ReadAllText("PaisesCiudades.json");
                 if (!context.Pais.Any())
                 {
-                    var jsonData = File.ReadAllText("../NURBNB.Alojamiento.Infrastructure/EF/Json/PaisesCiudades.json");
+                    var jsonData = File.ReadAllText("PaisesCiudades.json");
                     var paisesCiudades = JsonConvert.DeserializeObject<PaisCiudadesDto>(jsonData);
                     List<Pais> paises = new List<Pais>();
                     foreach (var paisDto in paisesCiudades.data)
@@ -107,7 +112,7 @@ namespace NURBNB.Alojamiento.Infrastructure
             services.AddMassTransit(configure =>
             {
                 configure.AddConsumer<ReservaFinalizadaConsumer>();
-
+                configure.AddConsumer<ReservaRegistradaConsumer>();
                 configure.UsingRabbitMq((context, configurator) =>
                 {
 
@@ -121,6 +126,49 @@ namespace NURBNB.Alojamiento.Infrastructure
             });
 
             return services;
+        }
+
+        public static IServiceCollection AddConsulConfig(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddSingleton<IConsulClient, ConsulClient>(p => new ConsulClient(consulConfig =>
+            {
+                var configSettings = configuration.GetSection(nameof(ConfigurationSetting)).Get<ConfigurationSetting>();
+                var address = configSettings.ConsulAddresss;
+                consulConfig.Address = new Uri(address);
+            }));
+            return services;
+        }
+
+        public static IApplicationBuilder UseConsul(this IApplicationBuilder app, IConfiguration configuration)
+        {
+            var consulClient = app.ApplicationServices.GetRequiredService<IConsulClient>();
+            var logger = app.ApplicationServices.GetRequiredService<ILoggerFactory>().CreateLogger("AppExtensions");
+            var lifetime = app.ApplicationServices.GetRequiredService<IApplicationLifetime>();
+
+            //var uri = new Uri(address);
+            var configSettings = configuration.GetSection(nameof(ConfigurationSetting)).Get<ConfigurationSetting>();
+            var serviceName = configSettings.ServiceName;
+            var serviceHost = configSettings.ServiceHost;
+            var servicePort = configSettings.ServicePort;
+            var registration = new AgentServiceRegistration()
+            {
+                ID = serviceName, //{uri.Port}",
+                // servie name  
+                Name = serviceName,
+                Address = serviceHost, //$"{uri.Host}",
+                Port = servicePort  // uri.Port
+            };
+
+            logger.LogInformation("Registering with Consul");
+            consulClient.Agent.ServiceDeregister(registration.ID).ConfigureAwait(true);
+            consulClient.Agent.ServiceRegister(registration).ConfigureAwait(true);
+
+            lifetime.ApplicationStopping.Register(() =>
+            {
+                logger.LogInformation("Unregistering from Consul");
+            });
+
+            return app;
         }
     }
 }

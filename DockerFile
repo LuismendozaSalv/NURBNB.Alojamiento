@@ -5,6 +5,8 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["NURBNB.Alojamiento.WebAPI/NURBNB.Alojamiento.WebAPI.csproj", "NURBNB.Alojamiento.WebAPI/"]
+COPY ["NURBNB.IntegrationEvents/NURBNB.IntegrationEvents/NURBNB.IntegrationEvents.csproj", "NURBNB.IntegrationEvents/"]
+
 RUN dotnet restore "NURBNB.Alojamiento.WebAPI/NURBNB.Alojamiento.WebAPI.csproj"
 COPY . .
 WORKDIR "/src/NURBNB.Alojamiento.WebAPI"
