@@ -25,9 +25,9 @@ namespace NURBNB.Alojamiento.Infrastructure.MassTransit.Consumers
             var message = context.Message;
             var command = new AgregarReservaPropiedadCommand
             {
-                ReservaId = message.ReservaId,
-                FechaEntrada = message.FechaLlegada,
-                FechaSalida = message.FechaSalida,
+                ReservaId = message.reservaId,
+                FechaEntrada = message.fechaLlegada,
+                FechaSalida = message.fechaSalida,
                 Estado = Domain.Model.Alojamiento.EstadoReserva.Pendiente
             };
             await _mediator.Send(command);
