@@ -26,7 +26,7 @@ namespace NURBNB.Alojamiento.Infrastructure.MassTransit.Consumers
             var command = new AgregarReservaPropiedadCommand
             {
                 ReservaId = message.ReservaId,
-                FechaEntrada = message.FechaEntrada,
+                FechaEntrada = message.FechaLlegada,
                 FechaSalida = message.FechaSalida,
                 Estado = Domain.Model.Alojamiento.EstadoReserva.Pendiente
             };
