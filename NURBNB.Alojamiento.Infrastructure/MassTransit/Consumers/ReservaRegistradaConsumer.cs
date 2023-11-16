@@ -11,7 +11,7 @@ using NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarReserva
 
 namespace NURBNB.Alojamiento.Infrastructure.MassTransit.Consumers
 {
-    public class ReservaRegistradaConsumer : IConsumer<ReservaRegistrada>
+    public class ReservaRegistradaConsumer : IConsumer<ReservaRegistradaEliminar>
     {
         private readonly IMediator _mediator;
 
@@ -20,7 +20,7 @@ namespace NURBNB.Alojamiento.Infrastructure.MassTransit.Consumers
             _mediator = mediator;
         }
 
-        public async Task Consume(ConsumeContext<ReservaRegistrada> context)
+        public async Task Consume(ConsumeContext<ReservaRegistradaEliminar> context)
         {
             var message = context.Message;
             var command = new AgregarReservaPropiedadCommand
