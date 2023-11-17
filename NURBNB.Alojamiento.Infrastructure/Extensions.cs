@@ -113,10 +113,12 @@ namespace NURBNB.Alojamiento.Infrastructure
             {
                 configure.AddConsumer<ReservaFinalizadaConsumer>();
                 configure.AddConsumer<ReservaRegistradaConsumer>();
+                configure.AddConsumer<CheckOutFinalizadoConsumer>();
                 configure.UsingRabbitMq((context, configurator) =>
                 {
-
-                    configurator.Host(rabbitMQSettings.Host);
+                    bool IsRunningInContainer = bool.TryParse(Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER"), out var inDocker) && inDocker;
+                    var host = IsRunningInContainer ? "rabbitmq" : "localhost";
+                    configurator.Host(host);
                     configurator.ConfigureEndpoints(context, new KebabCaseEndpointNameFormatter(serviceName, false));
                     configurator.UseMessageRetry(retryConfigurator =>
                     {
