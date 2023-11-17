@@ -12,5 +12,6 @@ namespace NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.CrearAloja
         public int Personas { get; set; }
         public int Camas { get; set; }
         public int Habitaciones { get; set; }
+        public Guid UsuarioId { get; set; }
     }
 }

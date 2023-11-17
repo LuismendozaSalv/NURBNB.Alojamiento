@@ -19,13 +19,14 @@ namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
         public IEnumerable<PropiedadComodidad> Comodidades => _comodidades;
         private readonly IList<Reserva> _reservas;
         public IEnumerable<Reserva> Reservas => _reservas;
+        public Guid UsuarioId { get; private set; }
 
         internal Propiedad()
         {
             
         }
         public Propiedad(string titulo, string descripcion, TipoPropiedad tipoPropiedad, 
-            decimal precio, Capacidad capacidad)
+            decimal precio, Capacidad capacidad, Guid usuarioId)
         {
             Id = Guid.NewGuid();
             Titulo = titulo;
@@ -37,6 +38,8 @@ namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
             _reglas = new List<Regla>();
             _comodidades = new List<PropiedadComodidad>();
             _reservas = new List<Reserva>();
+            UsuarioId = usuarioId;
+
         }
 
         public void AgregarDireccion(string calle, string avenida, string referencia, 

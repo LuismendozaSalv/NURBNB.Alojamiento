@@ -23,7 +23,7 @@ namespace NURBNB.Alojamiento.Test.Domain.Model
             Capacidad capacidad = new Capacidad(8, 8, 4);
 
             // Act
-            var propiedad = new Propiedad(titulo, descripcion, tipoPropiedad, precio, capacidad);
+            var propiedad = new Propiedad(titulo, descripcion, tipoPropiedad, precio, capacidad, new Guid());
 
             // Assert
             Assert.Equal(titulo, propiedad.Titulo);
@@ -44,14 +44,14 @@ namespace NURBNB.Alojamiento.Test.Domain.Model
             //Arrange
             Capacidad capacidad = new Capacidad(personas, camas, habitaciones);
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => new Propiedad(titulo, descripcion, tipoPropiedad, precio, capacidad));
+            Assert.Throws<ArgumentException>(() => new Propiedad(titulo, descripcion, tipoPropiedad, precio, capacidad, new Guid()));
         }
 
         [Fact]
         public void AgregarDireccion_ArgumentosValidos_DebeAgregarDireccion()
         {
             // Arrange
-            var propiedad = new Propiedad("Título", "Descripción", TipoPropiedad.Casa, 100000, new Capacidad(4, 4, 4));
+            var propiedad = new Propiedad("Título", "Descripción", TipoPropiedad.Casa, 100000, new Capacidad(4, 4, 4), new Guid());
             string calle = "Calle Principal";
             string avenida = "Avenida Principal";
             string referencia = "Referencia";
@@ -92,7 +92,7 @@ namespace NURBNB.Alojamiento.Test.Domain.Model
         public void AgregarComodidad_ComodidadValida_DebeAgregarComodidad()
         {
             // Arrange
-            var propiedad = new Propiedad("Título", "Descripción", TipoPropiedad.Casa, 100000, new Capacidad(4, 4, 4));
+            var propiedad = new Propiedad("Título", "Descripción", TipoPropiedad.Casa, 100000, new Capacidad(4, 4, 4), new Guid());
             string nombre = "Wifi";
             string descripcion = "Acceso a Internet inalámbrico";
 
@@ -123,7 +123,7 @@ namespace NURBNB.Alojamiento.Test.Domain.Model
         public void AgregarFoto_UrlValida_DebeAgregarFoto()
         {
             // Arrange
-            var propiedad = new Propiedad("Título", "Descripción", TipoPropiedad.Casa, 100000, new Capacidad(4, 4, 2));
+            var propiedad = new Propiedad("Título", "Descripción", TipoPropiedad.Casa, 100000, new Capacidad(4, 4, 2), new Guid());
             string url = "https://example.com/image.jpg";
 
             // Act
@@ -149,7 +149,7 @@ namespace NURBNB.Alojamiento.Test.Domain.Model
         public void AgregarRegla_ReglaValida_DebeAgregarRegla()
         {
             // Arrange
-            var propiedad = new Propiedad("Título", "Descripción", TipoPropiedad.Casa, 100000, new Capacidad(4, 4, 4));
+            var propiedad = new Propiedad("Título", "Descripción", TipoPropiedad.Casa, 100000, new Capacidad(4, 4, 4), new Guid());
             string regla = "Regla de ejemplo";
 
             // Act

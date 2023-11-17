@@ -16,12 +16,18 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-      
+
   web_api:
     image: lems2503/nurbnb-alojamiento
     container_name: web_api_application
     ports:
-      - "5000:80"  
+      - "5000:80"
+
+  web_api_usuario:
+    image: klbraguilar/nurbnb-usuario
+    container_name: web_api_usuario
+    ports:
+      - "8001:80"  
 
 networks:
   default:

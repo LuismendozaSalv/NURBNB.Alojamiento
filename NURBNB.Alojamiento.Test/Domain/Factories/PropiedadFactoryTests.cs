@@ -21,11 +21,12 @@ namespace NURBNB.Alojamiento.Test.Domain.Factories
             int personas = 4;
             int camas = 2;
             int habitaciones = 2;
+            var usuarioId = new Guid();
 
             PropiedadFactory factory = new PropiedadFactory();
 
             // Act
-            Propiedad propiedad = factory.CreatePropiedadApartamento(titulo, descripcion, precio, personas, camas, habitaciones);
+            Propiedad propiedad = factory.CreatePropiedadApartamento(titulo, descripcion, precio, personas, camas, habitaciones, usuarioId);
 
             // Assert
             Assert.NotNull(propiedad);
@@ -49,11 +50,11 @@ namespace NURBNB.Alojamiento.Test.Domain.Factories
             int personas = 8;
             int camas = 4;
             int habitaciones = 3;
-
+            var usuarioId = new Guid();
             PropiedadFactory factory = new PropiedadFactory();
 
             // Act
-            Propiedad propiedad = factory.CreatePropiedadCasa(titulo, descripcion, precio, personas, camas, habitaciones);
+            Propiedad propiedad = factory.CreatePropiedadCasa(titulo, descripcion, precio, personas, camas, habitaciones, usuarioId);
 
             // Assert
             Assert.NotNull(propiedad);
@@ -77,11 +78,11 @@ namespace NURBNB.Alojamiento.Test.Domain.Factories
             int personas = 1;
             int camas = 1;
             int habitaciones = 1;
-
+            var usuarioId = new Guid();
             PropiedadFactory factory = new PropiedadFactory();
 
             // Act
-            Propiedad propiedad = factory.CreatePropiedadHabitacion(titulo, descripcion, precio, personas, camas, habitaciones);
+            Propiedad propiedad = factory.CreatePropiedadHabitacion(titulo, descripcion, precio, personas, camas, habitaciones, usuarioId);
 
             // Assert
             Assert.NotNull(propiedad);

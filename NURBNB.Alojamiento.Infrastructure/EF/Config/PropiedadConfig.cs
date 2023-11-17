@@ -22,6 +22,9 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Config
             builder.Property(x => x.Id)
             .HasColumnName("propiedadId");
 
+            builder.Property(x => x.UsuarioId)
+            .HasColumnName("usuarioId");
+
             var tituloConverter = new ValueConverter<TituloPropiedad, string>(
                 tituloValue => tituloValue.Value,
                 titulo => new TituloPropiedad(titulo)

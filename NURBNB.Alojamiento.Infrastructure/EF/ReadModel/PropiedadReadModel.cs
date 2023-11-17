@@ -45,6 +45,10 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.ReadModel
         [Required]
         [Column("habitaciones")]
         public int Habitaciones { get; set; }
+
+        [Required]
+        [Column("usuarioId")]
+        public Guid UsuarioId { get; set; }
         public DireccionReadModel? Direccion { get; set; }
         public List<FotoReadModel>? Fotos { get; set; }
         public List<ReglaReadModel>? Reglas { get; set; }

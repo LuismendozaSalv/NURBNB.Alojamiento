@@ -27,13 +27,16 @@ namespace NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.CrearAloja
             switch (tipoPropiedad)
             {
                 case (TipoPropiedad)Dto.Propiedad.TipoPropiedad.Casa:
-                    propiedadCreada = _propiedadFactory.CreatePropiedadCasa(request.Titulo, request.Descripcion, request.Precio, request.Personas, request.Camas, request.Habitaciones);
+                    propiedadCreada = _propiedadFactory.CreatePropiedadCasa(request.Titulo, request.Descripcion, request.Precio, request.Personas, 
+                        request.Camas, request.Habitaciones, request.UsuarioId);
                     break;
                 case (TipoPropiedad)Dto.Propiedad.TipoPropiedad.Apartamento:
-                    propiedadCreada = _propiedadFactory.CreatePropiedadApartamento(request.Titulo, request.Descripcion, request.Precio, request.Personas, request.Camas, request.Habitaciones);
+                    propiedadCreada = _propiedadFactory.CreatePropiedadApartamento(request.Titulo, request.Descripcion, request.Precio, 
+                        request.Personas, request.Camas, request.Habitaciones, request.UsuarioId);
                     break;
                 case (TipoPropiedad)Dto.Propiedad.TipoPropiedad.Habitacion:
-                    propiedadCreada = _propiedadFactory.CreatePropiedadHabitacion(request.Titulo, request.Descripcion, request.Precio, request.Personas, request.Camas, request.Habitaciones);
+                    propiedadCreada = _propiedadFactory.CreatePropiedadHabitacion(request.Titulo, request.Descripcion, request.Precio, 
+                        request.Personas, request.Camas, request.Habitaciones, request.UsuarioId);
                     break;
             }
             await _propiedadRepository.CreateAsync(propiedadCreada);

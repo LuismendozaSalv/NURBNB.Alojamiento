@@ -18,7 +18,7 @@ namespace NURBNB.Alojamiento.Test.Application.UseCases.AlojamientoTest.Command.C
             int personas = 10;
             int camas = 5;
             int habitaciones = 5;
-            var propiedadEsperada = new PropiedadFactory().CreatePropiedadApartamento(titulo, descripcion, precio, personas, camas, habitaciones);
+            var propiedadEsperada = new PropiedadFactory().CreatePropiedadApartamento(titulo, descripcion, precio, personas, camas, habitaciones, new Guid());
             return propiedadEsperada;
         }
 
@@ -30,7 +30,7 @@ namespace NURBNB.Alojamiento.Test.Application.UseCases.AlojamientoTest.Command.C
             int personas = 10;
             int camas = 10;
             int habitaciones = 5;
-            var propiedadEsperada = new PropiedadFactory().CreatePropiedadCasa(titulo, descripcion, precio, personas, camas, habitaciones);
+            var propiedadEsperada = new PropiedadFactory().CreatePropiedadCasa(titulo, descripcion, precio, personas, camas, habitaciones, new Guid());
             return propiedadEsperada;
         }
 
@@ -42,7 +42,7 @@ namespace NURBNB.Alojamiento.Test.Application.UseCases.AlojamientoTest.Command.C
             int personas = 10;
             int camas = 5;
             int habitaciones = 1;
-            var propiedadEsperada = new PropiedadFactory().CreatePropiedadHabitacion(titulo, descripcion, precio, personas, camas, habitaciones);
+            var propiedadEsperada = new PropiedadFactory().CreatePropiedadHabitacion(titulo, descripcion, precio, personas, camas, habitaciones, new Guid());
             return propiedadEsperada;
         }
     }
