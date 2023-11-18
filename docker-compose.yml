@@ -21,7 +21,7 @@ services:
     image: lems2503/nurbnb-alojamiento
     container_name: web_api_application
     ports:
-      - "5000:80"
+      - "5196:80"
 
   web_api_usuario:
     image: klbraguilar/nurbnb-usuario

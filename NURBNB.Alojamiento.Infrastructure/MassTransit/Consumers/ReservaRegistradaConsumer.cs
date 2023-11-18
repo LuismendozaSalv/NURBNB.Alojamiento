@@ -28,6 +28,7 @@ namespace NURBNB.Alojamiento.Infrastructure.MassTransit.Consumers
                 ReservaId = message.reservaId,
                 FechaEntrada = message.fechaLlegada,
                 FechaSalida = message.fechaSalida,
+                PropiedadId = message.PropiedadId,
                 Estado = Domain.Model.Alojamiento.EstadoReserva.Pendiente
             };
             await _mediator.Send(command);
