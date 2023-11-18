@@ -13,6 +13,7 @@
                Camas = propiedad.Capacidad.Beds,
                Personas = propiedad.Capacidad.People,
                Habitaciones = propiedad.Capacidad.Rooms,
+               TipoPropiedad = propiedad.TipoPropiedad.ToString(),
                Fotos = propiedad.Fotos.Select(foto => new FotoDto { Url = foto.Url}).ToList()
             };
         }

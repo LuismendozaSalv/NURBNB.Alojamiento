@@ -17,6 +17,8 @@ namespace NURBNB.Alojamiento.Application.Dto.Propiedad
         public int Personas { get; set; }
         public int Camas { get; set; }
         public int Habitaciones { get; set; }
+
+        public string TipoPropiedad { get; set; }
         public IList<FotoDto> Fotos { get; set; }
     }
 }

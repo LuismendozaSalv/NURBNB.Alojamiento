@@ -155,5 +155,17 @@ namespace NURBNB.Alojamiento.WebAPI.Controllers
 
             return Ok(items);
         }
+
+        [HttpGet]
+        [Route("BuscarPropiedadPorUsuario/{usuarioId:guid}")]
+        public async Task<IActionResult> BuscarPropiedadPorUsuario(Guid usuarioId)
+        {
+            var items = await _mediator.Send(new IGetPropiedadByUsuarioIdQueryList()
+            {
+                UsuarioId = usuarioId
+            });
+
+            return Ok(items);
+        }
     }
 }

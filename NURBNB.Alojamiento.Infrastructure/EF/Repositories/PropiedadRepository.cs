@@ -80,5 +80,15 @@ namespace NURBNB.Alojamiento.Infrastructure.EF.Repositories
             var propiedadAsociada = _context.Propiedad.FirstOrDefaultAsync(propiedad => propiedad.Reservas.Any(reserva => reserva.Id == reservaId));
             return propiedadAsociada;
         }
+
+        public async Task<List<Propiedad>> FindByUsuarioId(Guid usuarioId)
+        {
+            var propiedades = _context.Propiedad
+                .Include(x => x.Reservas)
+                .Include(x => x.Direccion)
+                .Where(x => x.UsuarioId == usuarioId)
+                    .ToList();
+            return propiedades;
+        }
     }
 }
