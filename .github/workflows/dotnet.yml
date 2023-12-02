@@ -20,7 +20,7 @@ jobs:
       with: 
         repository: LuismendozaSalv/NURBNB.IntegrationEvents
         ref: master
-        path: NURBNB.Alojamiento/NURBNB.Alojamiento/NURBNB.IntegrationEvents
+        path: NURBNB.IntegrationEvents
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
