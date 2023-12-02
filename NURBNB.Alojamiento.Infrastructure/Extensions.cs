@@ -149,7 +149,7 @@ namespace NURBNB.Alojamiento.Infrastructure
 
             //var uri = new Uri(address);
             var configSettings = configuration.GetSection(nameof(ConfigurationSetting)).Get<ConfigurationSetting>();
-            var serviceName = configSettings.ServiceName;
+            var serviceName = configSettings!.ServiceName;
             var serviceHost = configSettings.ServiceHost;
             var servicePort = configSettings.ServicePort;
             var registration = new AgentServiceRegistration()
