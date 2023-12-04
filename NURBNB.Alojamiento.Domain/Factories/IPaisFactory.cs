@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Domain.Factories
 {
-    public interface IPaisFactory
-    {
-        public Pais Crear(string nombre, string codigoPais);
-    }
+	public interface IPaisFactory
+	{
+		public Pais Crear(string nombre, string codigoPais);
+	}
 }

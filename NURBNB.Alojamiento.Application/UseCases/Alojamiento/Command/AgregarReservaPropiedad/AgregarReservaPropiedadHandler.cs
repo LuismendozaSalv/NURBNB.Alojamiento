@@ -13,35 +13,35 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarReservaPropiedad
 {
-    public class AgregarReservaPropiedadHandler : IRequestHandler<AgregarReservaPropiedadCommand, Guid>
-    {
-        private IPropiedadRepository _propiedadRepository;
-        private IUnitOfWork _unitOfWork;
+	public class AgregarReservaPropiedadHandler : IRequestHandler<AgregarReservaPropiedadCommand, Guid>
+	{
+		private IPropiedadRepository _propiedadRepository;
+		private IUnitOfWork _unitOfWork;
 
-        public AgregarReservaPropiedadHandler(IPropiedadRepository propiedadRepository,
-            IUnitOfWork unitOfWork)
-        {
-            _propiedadRepository = propiedadRepository;
-            _unitOfWork = unitOfWork;
-        }
+		public AgregarReservaPropiedadHandler(IPropiedadRepository propiedadRepository,
+			IUnitOfWork unitOfWork)
+		{
+			_propiedadRepository = propiedadRepository;
+			_unitOfWork = unitOfWork;
+		}
 
-        public async Task<Guid> Handle(AgregarReservaPropiedadCommand request, CancellationToken cancellationToken)
-        {
+		public async Task<Guid> Handle(AgregarReservaPropiedadCommand request, CancellationToken cancellationToken)
+		{
 
-            var propiedad = await _propiedadRepository.FindByIdAsync(request.PropiedadId);
-            if (propiedad != null)
-            {
-                var reserva = new ReservaFactory().Crear(request.ReservaId,
-                    request.FechaEntrada, 
-                    request.FechaSalida, 
-                    (EstadoReserva)request.Estado);
-                propiedad.AgregarReserva(reserva);
-                await _propiedadRepository.UpdateAsync(propiedad);
-                await _unitOfWork.Commit();
-                return propiedad.Id;
-            }
-            return Guid.NewGuid();
-        }
+			var propiedad = await _propiedadRepository.FindByIdAsync(request.PropiedadId);
+			if (propiedad != null)
+			{
+				var reserva = new ReservaFactory().Crear(request.ReservaId,
+					request.FechaEntrada,
+					request.FechaSalida,
+					(EstadoReserva)request.Estado);
+				propiedad.AgregarReserva(reserva);
+				await _propiedadRepository.UpdateAsync(propiedad);
+				await _unitOfWork.Commit();
+				return propiedad.Id;
+			}
+			return Guid.NewGuid();
+		}
 
-    }
+	}
 }

@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Domain.Repositories
 {
-    public interface IAlojamientoRepository : IRepository<Propiedad, Guid>
-    {
-        Task UpdateAsync(Propiedad alojamiento);
-    }
+	public interface IAlojamientoRepository : IRepository<Propiedad, Guid>
+	{
+		Task UpdateAsync(Propiedad alojamiento);
+	}
 }

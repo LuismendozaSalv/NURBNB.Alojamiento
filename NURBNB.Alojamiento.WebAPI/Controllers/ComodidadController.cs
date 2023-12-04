@@ -6,27 +6,27 @@ using NURBNB.Alojamiento.Application.UseCases.Comodidad.AgregarComodidad.Command
 
 namespace NURBNB.Alojamiento.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ComodidadController : ControllerBase
-    {
-        private readonly IMediator _mediator;
-        public ComodidadController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CrearComodidadCommand command)
-        {
-            try
-            {
-                var comodidadId = await _mediator.Send(command);
-                return Ok(comodidadId);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-    }
+	[Route("api/[controller]")]
+	[ApiController]
+	public class ComodidadController : ControllerBase
+	{
+		private readonly IMediator _mediator;
+		public ComodidadController(IMediator mediator)
+		{
+			_mediator = mediator;
+		}
+		[HttpPost]
+		public async Task<IActionResult> Post([FromBody] CrearComodidadCommand command)
+		{
+			try
+			{
+				var comodidadId = await _mediator.Send(command);
+				return Ok(comodidadId);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
+		}
+	}
 }

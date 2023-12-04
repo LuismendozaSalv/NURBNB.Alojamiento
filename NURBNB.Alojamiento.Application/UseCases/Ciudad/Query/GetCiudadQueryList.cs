@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Application.UseCases.Ciudad.Query
 {
-    public class GetCiudadQueryList : IRequest<ICollection<CiudadDto>>
-    {
-        public string SearchTerm { get; set; }
-    }
+	public class GetCiudadQueryList : IRequest<ICollection<CiudadDto>>
+	{
+		public string SearchTerm { get; set; }
+	}
 }

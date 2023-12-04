@@ -10,110 +10,110 @@ using TipoPropiedad = NURBNB.Alojamiento.Application.Dto.Propiedad.TipoPropiedad
 
 namespace NURBNB.Alojamiento.Test.Application.UseCases.AlojamientoTest.Command.CrearPropiedad
 {
-    public class CrearPropiedad_Test
-    {
-        Mock<IPropiedadRepository> _propiedadRepository;
-        Mock<IPropiedadFactory> _propiedadFactory;
-        Mock<IUnitOfWork> _unitOfWork;
+	public class CrearPropiedad_Test
+	{
+		private readonly Mock<IPropiedadRepository> _propiedadRepository;
+		private readonly Mock<IPropiedadFactory> _propiedadFactory;
+		private readonly Mock<IUnitOfWork> _unitOfWork;
 
-        public CrearPropiedad_Test()
-        {
-            _propiedadFactory = new Mock<IPropiedadFactory>();
-            _propiedadRepository = new Mock<IPropiedadRepository>();
-            _unitOfWork = new Mock<IUnitOfWork>();
-        }
+		public CrearPropiedad_Test()
+		{
+			_propiedadFactory = new Mock<IPropiedadFactory>();
+			_propiedadRepository = new Mock<IPropiedadRepository>();
+			_unitOfWork = new Mock<IUnitOfWork>();
+		}
 
-        [Fact]
-        public void CrearPropiedadApartamentoConValoresCorrectos()
-        {
-            var propiedadEsperada = PropiedadMockFactory.getPropiedadApartamento();
+		[Fact]
+		public void CrearPropiedadApartamentoConValoresCorrectos()
+		{
+			var propiedadEsperada = PropiedadMockFactory.GetPropiedadApartamento();
 
-            _propiedadFactory.Setup(_propiedadFactory => _propiedadFactory.CreatePropiedadApartamento(propiedadEsperada.Titulo,
-                propiedadEsperada.Descripcion, propiedadEsperada.Precio,
-                propiedadEsperada.Capacidad.People, propiedadEsperada.Capacidad.Beds, propiedadEsperada.Capacidad.Rooms, new Guid()))
-                .Returns(propiedadEsperada);
+			_propiedadFactory.Setup(_propiedadFactory => _propiedadFactory.CreatePropiedadApartamento(propiedadEsperada.Titulo,
+				propiedadEsperada.Descripcion, propiedadEsperada.Precio,
+				propiedadEsperada.Capacidad!.People, propiedadEsperada.Capacidad.Beds, propiedadEsperada.Capacidad.Rooms, Guid.NewGuid()))
+				.Returns(propiedadEsperada);
 
-            var handler = new CrearPropiedadHandler(
-                _propiedadRepository.Object,
-                _propiedadFactory.Object,
-                _unitOfWork.Object
-            );
-            var tcs = new CancellationTokenSource(1000);
-            CrearPropiedadCommand evento = new CrearPropiedadCommand
-            {
-                Titulo = propiedadEsperada.Titulo,
-                Descripcion = propiedadEsperada.Descripcion,
-                Camas = propiedadEsperada.Capacidad.Beds,
-                Habitaciones = propiedadEsperada.Capacidad.Rooms,
-                Personas = propiedadEsperada.Capacidad.People,
-                Precio = propiedadEsperada.Precio,
-                TipoPropiedad = (TipoPropiedad)propiedadEsperada.TipoPropiedad
-            };
-            var propiedadId = handler.Handle(evento, tcs.Token);
+			var handler = new CrearPropiedadHandler(
+				_propiedadRepository.Object,
+				_propiedadFactory.Object,
+				_unitOfWork.Object
+			);
+			var tcs = new CancellationTokenSource(1000);
+			CrearPropiedadCommand evento = new()
+			{
+				Titulo = propiedadEsperada.Titulo,
+				Descripcion = propiedadEsperada.Descripcion,
+				Camas = propiedadEsperada.Capacidad!.Beds,
+				Habitaciones = propiedadEsperada.Capacidad.Rooms,
+				Personas = propiedadEsperada.Capacidad.People,
+				Precio = propiedadEsperada.Precio,
+				TipoPropiedad = (TipoPropiedad)propiedadEsperada.TipoPropiedad
+			};
+			var propiedadId = handler.Handle(evento, tcs.Token);
 
-            Assert.Equal(propiedadEsperada.Id, propiedadId.Result);
-        }
+			Assert.Equal(propiedadEsperada.Id, propiedadId.Result);
+		}
 
-        [Fact]
-        public void CrearPropiedadCasaConValoresCorrectos()
-        {
-            var propiedadEsperada = PropiedadMockFactory.getPropiedadCasa();
+		[Fact]
+		public void CrearPropiedadCasaConValoresCorrectos()
+		{
+			var propiedadEsperada = PropiedadMockFactory.GetPropiedadCasa();
 
-            _propiedadFactory.Setup(_propiedadFactory => _propiedadFactory.CreatePropiedadCasa(propiedadEsperada.Titulo,
-                propiedadEsperada.Descripcion, propiedadEsperada.Precio,
-                propiedadEsperada.Capacidad.People, propiedadEsperada.Capacidad.Beds, propiedadEsperada.Capacidad.Rooms, new Guid()))
-                .Returns(propiedadEsperada);
+			_propiedadFactory.Setup(_propiedadFactory => _propiedadFactory.CreatePropiedadCasa(propiedadEsperada.Titulo,
+				propiedadEsperada.Descripcion, propiedadEsperada.Precio,
+				propiedadEsperada.Capacidad!.People, propiedadEsperada.Capacidad.Beds, propiedadEsperada.Capacidad.Rooms, Guid.NewGuid()))
+				.Returns(propiedadEsperada);
 
-            var handler = new CrearPropiedadHandler(
-                _propiedadRepository.Object,
-                _propiedadFactory.Object,
-                _unitOfWork.Object
-            );
-            var tcs = new CancellationTokenSource(1000);
-            CrearPropiedadCommand evento = new CrearPropiedadCommand
-            {
-                Titulo = propiedadEsperada.Titulo,
-                Descripcion = propiedadEsperada.Descripcion,
-                Camas = propiedadEsperada.Capacidad.Beds,
-                Habitaciones = propiedadEsperada.Capacidad.Rooms,
-                Personas = propiedadEsperada.Capacidad.People,
-                Precio = propiedadEsperada.Precio,
-                TipoPropiedad = (TipoPropiedad)propiedadEsperada.TipoPropiedad
-            };
-            var propiedadId = handler.Handle(evento, tcs.Token);
+			var handler = new CrearPropiedadHandler(
+				_propiedadRepository.Object,
+				_propiedadFactory.Object,
+				_unitOfWork.Object
+			);
+			var tcs = new CancellationTokenSource(1000);
+			CrearPropiedadCommand evento = new()
+			{
+				Titulo = propiedadEsperada.Titulo,
+				Descripcion = propiedadEsperada.Descripcion,
+				Camas = propiedadEsperada.Capacidad!.Beds,
+				Habitaciones = propiedadEsperada.Capacidad.Rooms,
+				Personas = propiedadEsperada.Capacidad.People,
+				Precio = propiedadEsperada.Precio,
+				TipoPropiedad = (TipoPropiedad)propiedadEsperada.TipoPropiedad
+			};
+			var propiedadId = handler.Handle(evento, tcs.Token);
 
-            Assert.Equal(propiedadEsperada.Id, propiedadId.Result);
-        }
+			Assert.Equal(propiedadEsperada.Id, propiedadId.Result);
+		}
 
-        [Fact]
-        public void CrearPropiedadHabitacionConValoresCorrectos()
-        {
-            var propiedadEsperada = PropiedadMockFactory.getPropiedadHabitacion();
+		[Fact]
+		public void CrearPropiedadHabitacionConValoresCorrectos()
+		{
+			var propiedadEsperada = PropiedadMockFactory.GetPropiedadHabitacion();
 
-            _propiedadFactory.Setup(_propiedadFactory => _propiedadFactory.CreatePropiedadHabitacion(propiedadEsperada.Titulo,
-                propiedadEsperada.Descripcion, propiedadEsperada.Precio,
-                propiedadEsperada.Capacidad.People, propiedadEsperada.Capacidad.Beds, propiedadEsperada.Capacidad.Rooms, new Guid()))
-                .Returns(propiedadEsperada);
+			_propiedadFactory.Setup(_propiedadFactory => _propiedadFactory.CreatePropiedadHabitacion(propiedadEsperada.Titulo,
+				propiedadEsperada.Descripcion, propiedadEsperada.Precio,
+				propiedadEsperada.Capacidad!.People, propiedadEsperada.Capacidad.Beds, propiedadEsperada.Capacidad.Rooms, Guid.NewGuid()))
+				.Returns(propiedadEsperada);
 
-            var handler = new CrearPropiedadHandler(
-                _propiedadRepository.Object,
-                _propiedadFactory.Object,
-                _unitOfWork.Object
-            );
-            var tcs = new CancellationTokenSource(1000);
-            CrearPropiedadCommand evento = new CrearPropiedadCommand
-            {
-                Titulo = propiedadEsperada.Titulo,
-                Descripcion = propiedadEsperada.Descripcion,
-                Camas = propiedadEsperada.Capacidad.Beds,
-                Habitaciones = propiedadEsperada.Capacidad.Rooms,
-                Personas = propiedadEsperada.Capacidad.People,
-                Precio = propiedadEsperada.Precio,
-                TipoPropiedad = (TipoPropiedad)propiedadEsperada.TipoPropiedad
-            };
-            var propiedadId = handler.Handle(evento, tcs.Token);
+			var handler = new CrearPropiedadHandler(
+				_propiedadRepository.Object,
+				_propiedadFactory.Object,
+				_unitOfWork.Object
+			);
+			var tcs = new CancellationTokenSource(1000);
+			CrearPropiedadCommand evento = new()
+			{
+				Titulo = propiedadEsperada.Titulo,
+				Descripcion = propiedadEsperada.Descripcion,
+				Camas = propiedadEsperada.Capacidad!.Beds,
+				Habitaciones = propiedadEsperada.Capacidad.Rooms,
+				Personas = propiedadEsperada.Capacidad.People,
+				Precio = propiedadEsperada.Precio,
+				TipoPropiedad = (TipoPropiedad)propiedadEsperada.TipoPropiedad
+			};
+			var propiedadId = handler.Handle(evento, tcs.Token);
 
-            Assert.Equal(propiedadEsperada.Id, propiedadId.Result);
-        }
-    }
+			Assert.Equal(propiedadEsperada.Id, propiedadId.Result);
+		}
+	}
 }

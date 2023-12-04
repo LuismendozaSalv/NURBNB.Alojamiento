@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Test.Application.Dto
 {
-    public class ReglaDtoTests
-    {
-        [Fact]
-        public void ReglaDto_Valida_InicializaCion()
-        {
-            // Arrange
-            string value = "Ejemplo de valor";
+	public class ReglaDtoTests
+	{
+		[Fact]
+		public void ReglaDto_Valida_InicializaCion()
+		{
+			// Arrange
+			string value = "Ejemplo de valor";
 
-            // Act
-            var reglaDto = new ReglaDto
-            {
-                Value = value
-            };
+			// Act
+			var reglaDto = new ReglaDto
+			{
+				Value = value
+			};
 
-            // Assert
-            Assert.Equal(value, reglaDto.Value);
-        }
-    }
+			// Assert
+			Assert.Equal(value, reglaDto.Value);
+		}
+	}
 }

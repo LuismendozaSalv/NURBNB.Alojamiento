@@ -4,35 +4,35 @@ using Restaurant.SharedKernel.Rules;
 
 namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
 {
-    public class Direccion : Entity
-    {
-        public Guid PropiedadId { get; private set; }
-        public string Calle { get; init; }
-        public string Avenida { get; init; }
-        public string Referencia { get; init; }
-        public double Latitud { get; init; }
-        public double Longitud { get; init; }
-        public Ciudad Ciudad { get; private set; }
+	public class Direccion : Entity
+	{
+		public Guid PropiedadId { get; private set; }
+		public string Calle { get; init; }
+		public string Avenida { get; init; }
+		public string Referencia { get; init; }
+		public double Latitud { get; init; }
+		public double Longitud { get; init; }
+		public Ciudad Ciudad { get; private set; }
 
-        internal Direccion()
-        {
+		internal Direccion()
+		{
 
-        }
-        public Direccion(Guid propiedadId, string calle, string avenida, string referencia, 
-            double latitud, double longitud, Ciudad ciudad)
-        {
-            CheckRule(new StringNotNullOrEmptyRule(calle));
-            CheckRule(new StringNotNullOrEmptyRule(avenida));
-            CheckRule(new StringNotNullOrEmptyRule(referencia));
-            CheckRule(new IsValidCoordinate(latitud, longitud));
-            Id = Guid.NewGuid();
-            PropiedadId = propiedadId;
-            Calle = calle;
-            Avenida = avenida;
-            Referencia = referencia;
-            Latitud = latitud;
-            Longitud = longitud;
-            Ciudad = ciudad;
-        }
-    }
+		}
+		public Direccion(Guid propiedadId, string calle, string avenida, string referencia,
+			double latitud, double longitud, Ciudad ciudad)
+		{
+			CheckRule(new StringNotNullOrEmptyRule(calle));
+			CheckRule(new StringNotNullOrEmptyRule(avenida));
+			CheckRule(new StringNotNullOrEmptyRule(referencia));
+			CheckRule(new IsValidCoordinate(latitud, longitud));
+			Id = Guid.NewGuid();
+			PropiedadId = propiedadId;
+			Calle = calle;
+			Avenida = avenida;
+			Referencia = referencia;
+			Latitud = latitud;
+			Longitud = longitud;
+			Ciudad = ciudad;
+		}
+	}
 }

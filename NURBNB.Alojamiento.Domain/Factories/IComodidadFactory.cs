@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Domain.Factories
 {
-    public interface IComodidadFactory
-    {
-        public Comodidad Crear(string nombre, string descripcion);
-    }
+	public interface IComodidadFactory
+	{
+		public Comodidad Crear(string nombre, string descripcion);
+	}
 }

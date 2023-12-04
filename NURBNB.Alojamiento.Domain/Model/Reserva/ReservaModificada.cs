@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Domain.Model.Reserva
 {
-    internal class ReservaModificada
-    {
-    }
+	internal class ReservaModificada
+	{
+	}
 }

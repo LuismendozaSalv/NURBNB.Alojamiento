@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Domain.Repositories
 {
-    public interface IEntityRepository<T, in TId> where T : Entity
-    {
-        Task<T?> FindByIdAsync(TId id);
+	public interface IEntityRepository<T, in TId> where T : Entity
+	{
+		Task<T?> FindByIdAsync(TId id);
 
-        Task CreateAsync(T obj);
-    }
+		Task CreateAsync(T obj);
+	}
 }

@@ -9,19 +9,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace NURBNB.Alojamiento.Infrastructure.EF.ReadModel
 {
-    [Table("coordenada")]
-    public class CoordenadaReadModel
-    {
-        [Required]
-        [Column("direccionId")]
-        public Guid DireccionId { get; set; }
+	[Table("coordenada")]
+	public class CoordenadaReadModel
+	{
+		[Required]
+		[Column("direccionId")]
+		public Guid DireccionId { get; set; }
 
-        [Column("latitud")]
-        [Required]
-        public double Latitud { get; set; }
+		[Column("latitud")]
+		[Required]
+		public double Latitud { get; set; }
 
-        [Column("longitud")]
-        [Required]
-        public double Longitud { get; set; }
-    }
+		[Column("longitud")]
+		[Required]
+		public double Longitud { get; set; }
+	}
 }

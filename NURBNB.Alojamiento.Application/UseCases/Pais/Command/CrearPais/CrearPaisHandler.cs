@@ -10,31 +10,31 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Application.UseCases.Pais.Command.CrearPais
 {
-    
-    public class CrearPaisHandler : IRequestHandler<CrearPaisCommand, Guid>
-    {
-        private IPaisRepository _paisRepository;
-        private IPaisFactory _paisFactory;
-        private IUnitOfWork _unitOfWork;
 
-        public CrearPaisHandler(IPaisRepository paisRepository, 
-            IPaisFactory paisFactory, 
-            IUnitOfWork unitOfWork)
-        {
-            _paisRepository = paisRepository;
-            _paisFactory = paisFactory;
-            _unitOfWork = unitOfWork;
-        }
+	public class CrearPaisHandler : IRequestHandler<CrearPaisCommand, Guid>
+	{
+		private IPaisRepository _paisRepository;
+		private IPaisFactory _paisFactory;
+		private IUnitOfWork _unitOfWork;
 
-        public async Task<Guid> Handle(CrearPaisCommand request, CancellationToken cancellationToken)
-        {
-            var paisCreado = _paisFactory.Crear(request.Nombre, request.CodigoPais);
+		public CrearPaisHandler(IPaisRepository paisRepository,
+			IPaisFactory paisFactory,
+			IUnitOfWork unitOfWork)
+		{
+			_paisRepository = paisRepository;
+			_paisFactory = paisFactory;
+			_unitOfWork = unitOfWork;
+		}
 
-            await _paisRepository.CreateAsync(paisCreado);
+		public async Task<Guid> Handle(CrearPaisCommand request, CancellationToken cancellationToken)
+		{
+			var paisCreado = _paisFactory.Crear(request.Nombre, request.CodigoPais);
 
-            await _unitOfWork.Commit();
+			await _paisRepository.CreateAsync(paisCreado);
 
-            return paisCreado.Id;
-        }
-    }
+			await _unitOfWork.Commit();
+
+			return paisCreado.Id;
+		}
+	}
 }
