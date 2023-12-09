@@ -30,7 +30,7 @@ namespace NURBNB.Alojamiento.Test.Application.UseCases.AlojamientoTest.Command.C
 
 			_propiedadFactory.Setup(_propiedadFactory => _propiedadFactory.CreatePropiedadApartamento(propiedadEsperada.Titulo,
 				propiedadEsperada.Descripcion, propiedadEsperada.Precio,
-				propiedadEsperada.Capacidad!.People, propiedadEsperada.Capacidad.Beds, propiedadEsperada.Capacidad.Rooms, Guid.NewGuid()))
+				propiedadEsperada.Capacidad!.People, propiedadEsperada.Capacidad.Beds, propiedadEsperada.Capacidad.Rooms, propiedadEsperada.UsuarioId))
 				.Returns(propiedadEsperada);
 
 			var handler = new CrearPropiedadHandler(
@@ -47,7 +47,8 @@ namespace NURBNB.Alojamiento.Test.Application.UseCases.AlojamientoTest.Command.C
 				Habitaciones = propiedadEsperada.Capacidad.Rooms,
 				Personas = propiedadEsperada.Capacidad.People,
 				Precio = propiedadEsperada.Precio,
-				TipoPropiedad = (TipoPropiedad)propiedadEsperada.TipoPropiedad
+				TipoPropiedad = (TipoPropiedad)propiedadEsperada.TipoPropiedad,
+				UsuarioId = propiedadEsperada.UsuarioId
 			};
 			var propiedadId = handler.Handle(evento, tcs.Token);
 
@@ -61,7 +62,8 @@ namespace NURBNB.Alojamiento.Test.Application.UseCases.AlojamientoTest.Command.C
 
 			_propiedadFactory.Setup(_propiedadFactory => _propiedadFactory.CreatePropiedadCasa(propiedadEsperada.Titulo,
 				propiedadEsperada.Descripcion, propiedadEsperada.Precio,
-				propiedadEsperada.Capacidad!.People, propiedadEsperada.Capacidad.Beds, propiedadEsperada.Capacidad.Rooms, Guid.NewGuid()))
+				propiedadEsperada.Capacidad!.People, propiedadEsperada.Capacidad.Beds, propiedadEsperada.Capacidad.Rooms,
+				propiedadEsperada.UsuarioId))
 				.Returns(propiedadEsperada);
 
 			var handler = new CrearPropiedadHandler(
@@ -78,7 +80,8 @@ namespace NURBNB.Alojamiento.Test.Application.UseCases.AlojamientoTest.Command.C
 				Habitaciones = propiedadEsperada.Capacidad.Rooms,
 				Personas = propiedadEsperada.Capacidad.People,
 				Precio = propiedadEsperada.Precio,
-				TipoPropiedad = (TipoPropiedad)propiedadEsperada.TipoPropiedad
+				TipoPropiedad = (TipoPropiedad)propiedadEsperada.TipoPropiedad,
+				UsuarioId = propiedadEsperada.UsuarioId
 			};
 			var propiedadId = handler.Handle(evento, tcs.Token);
 
@@ -92,7 +95,8 @@ namespace NURBNB.Alojamiento.Test.Application.UseCases.AlojamientoTest.Command.C
 
 			_propiedadFactory.Setup(_propiedadFactory => _propiedadFactory.CreatePropiedadHabitacion(propiedadEsperada.Titulo,
 				propiedadEsperada.Descripcion, propiedadEsperada.Precio,
-				propiedadEsperada.Capacidad!.People, propiedadEsperada.Capacidad.Beds, propiedadEsperada.Capacidad.Rooms, Guid.NewGuid()))
+				propiedadEsperada.Capacidad!.People, propiedadEsperada.Capacidad.Beds, propiedadEsperada.Capacidad.Rooms,
+				propiedadEsperada.UsuarioId))
 				.Returns(propiedadEsperada);
 
 			var handler = new CrearPropiedadHandler(
@@ -109,7 +113,8 @@ namespace NURBNB.Alojamiento.Test.Application.UseCases.AlojamientoTest.Command.C
 				Habitaciones = propiedadEsperada.Capacidad.Rooms,
 				Personas = propiedadEsperada.Capacidad.People,
 				Precio = propiedadEsperada.Precio,
-				TipoPropiedad = (TipoPropiedad)propiedadEsperada.TipoPropiedad
+				TipoPropiedad = (TipoPropiedad)propiedadEsperada.TipoPropiedad,
+				UsuarioId = propiedadEsperada.UsuarioId
 			};
 			var propiedadId = handler.Handle(evento, tcs.Token);
 
