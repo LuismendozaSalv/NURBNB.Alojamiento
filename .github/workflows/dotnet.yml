@@ -59,7 +59,6 @@ jobs:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-            .\.sonar\scanner\dotnet-sonarscanner begin /k:"jmacboy_prueba-gitflow" /o:"jmacboy" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-            dotnet build --no-restore
+            .\.sonar\scanner\dotnet-sonarscanner begin /k:"LuismendozaSalv_NURBNB.Alojamiento" /o:"luismendozasalv" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"            dotnet build --no-restore
             dotnet test --no-build --verbosity normal
             .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
