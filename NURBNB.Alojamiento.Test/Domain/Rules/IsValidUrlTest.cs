@@ -7,34 +7,34 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Test.Domain.Rules
 {
-    public class IsValidUrlTests
-    {
-        [Fact]
-        public void IsValid_ValidUrl_ReturnsTrue()
-        {
-            // Arrange
-            string validUrl = "https://www.example.com";
-            var validator = new IsValidUrl(validUrl);
+	public class IsValidUrlTests
+	{
+		[Fact]
+		public void IsValid_ValidUrl_ReturnsTrue()
+		{
+			// Arrange
+			string validUrl = "https://www.example.com";
+			var validator = new IsValidUrl(validUrl);
 
-            // Act
-            bool result = validator.IsValid();
+			// Act
+			bool result = validator.IsValid();
 
-            // Assert
-            Assert.True(result);
-        }
+			// Assert
+			Assert.True(result);
+		}
 
-        [Fact]
-        public void IsValid_InvalidUrl_ReturnsFalse()
-        {
-            // Arrange
-            string invalidUrl = "not_a_valid_url";
-            var validator = new IsValidUrl(invalidUrl);
+		[Fact]
+		public void IsValid_InvalidUrl_ReturnsFalse()
+		{
+			// Arrange
+			string invalidUrl = "not_a_valid_url";
+			var validator = new IsValidUrl(invalidUrl);
 
-            // Act
-            bool result = validator.IsValid();
+			// Act
+			bool result = validator.IsValid();
 
-            // Assert
-            Assert.False(result);
-        }
-    }
+			// Assert
+			Assert.False(result);
+		}
+	}
 }

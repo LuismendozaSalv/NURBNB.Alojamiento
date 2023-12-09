@@ -12,30 +12,30 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Infrastructure.UsesCases.Pais.Query
 {
-    internal class GetPaisListHandler : IRequestHandler<GetPaisQueryList, ICollection<PaisDto>>
-    {
-        private readonly DbSet<PaisReadModel> _paises;
+	internal class GetPaisListHandler : IRequestHandler<GetPaisQueryList, ICollection<PaisDto>>
+	{
+		private readonly DbSet<PaisReadModel> _paises;
 
-        public GetPaisListHandler(ReadDbContext context)
-        {
-            _paises = context.Pais;
-        }
-        public async Task<ICollection<PaisDto>> Handle(GetPaisQueryList request, CancellationToken cancellationToken)
-        {
-            var query = _paises.AsNoTracking();
+		public GetPaisListHandler(ReadDbContext context)
+		{
+			_paises = context.Pais;
+		}
+		public async Task<ICollection<PaisDto>> Handle(GetPaisQueryList request, CancellationToken cancellationToken)
+		{
+			var query = _paises.AsNoTracking();
 
-            if (!string.IsNullOrWhiteSpace(request.SearchTerm))
-            {
-                query = query.Where(x => x.Nombre.Contains(request.SearchTerm));
-            }
+			if (!string.IsNullOrWhiteSpace(request.SearchTerm))
+			{
+				query = query.Where(x => x.Nombre.Contains(request.SearchTerm));
+			}
 
-            return await query.Select(pais =>
-                new PaisDto
-                {
-                    Id = pais.Id,
-                    Nombre = pais.Nombre,
-                    CodigoPais = pais.CodigoPais
-                }).ToListAsync(cancellationToken);
-        }
-    }
+			return await query.Select(pais =>
+				new PaisDto
+				{
+					Id = pais.Id,
+					Nombre = pais.Nombre,
+					CodigoPais = pais.CodigoPais
+				}).ToListAsync(cancellationToken);
+		}
+	}
 }

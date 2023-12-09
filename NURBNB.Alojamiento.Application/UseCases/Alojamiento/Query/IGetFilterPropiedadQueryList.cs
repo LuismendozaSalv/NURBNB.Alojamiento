@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Application.UseCases.Alojamiento.Query
 {
-    public class IGetFilterPropiedadQueryList : IRequest<ICollection<PropiedadDto>>
-    {
-        public Guid CiudadId { get; set; }
-        public DateTime FechaEntrada { get; set; }
-        public DateTime FechaSalida { get; set; }
-    }
+	public class IGetFilterPropiedadQueryList : IRequest<ICollection<PropiedadDto>>
+	{
+		public Guid CiudadId { get; set; }
+		public DateTime FechaEntrada { get; set; }
+		public DateTime FechaSalida { get; set; }
+	}
 }

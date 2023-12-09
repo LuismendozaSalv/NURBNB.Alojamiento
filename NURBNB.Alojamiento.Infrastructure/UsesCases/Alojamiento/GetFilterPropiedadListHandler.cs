@@ -10,25 +10,19 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Infrastructure.UsesCases.Alojamiento
 {
-    public class GetFilterPropiedadListHandler : IRequestHandler<IGetFilterPropiedadQueryList, ICollection<PropiedadDto>>
-    {
-        private IPropiedadRepository _propiedadRepository;
+	public class GetFilterPropiedadListHandler : IRequestHandler<IGetFilterPropiedadQueryList, ICollection<PropiedadDto>>
+	{
+		private readonly IPropiedadRepository _propiedadRepository;
 
-        public GetFilterPropiedadListHandler(IPropiedadRepository propiedadRepository)
-        {
-            _propiedadRepository = propiedadRepository;
-        }
-        public async Task<ICollection<PropiedadDto>> Handle(IGetFilterPropiedadQueryList request, CancellationToken cancellationToken)
-        {
-            if (request.CiudadId != null)
-            {
-
-                var propiedades = _propiedadRepository.FindByFilters(request.CiudadId, request.FechaEntrada, request.FechaSalida).Result;
-                var propiedadesDTO = propiedades.Select(propiedad => MapperPropiedadDto.MapToPropiedadDto(propiedad)).ToList();
-                return propiedadesDTO;
-            }
-
-            return new List<PropiedadDto>();
-        }
-    }
+		public GetFilterPropiedadListHandler(IPropiedadRepository propiedadRepository)
+		{
+			_propiedadRepository = propiedadRepository;
+		}
+		public async Task<ICollection<PropiedadDto>> Handle(IGetFilterPropiedadQueryList request, CancellationToken cancellationToken)
+		{
+			var propiedades = _propiedadRepository.FindByFilters(request.CiudadId, request.FechaEntrada, request.FechaSalida).Result;
+			var propiedadesDTO = propiedades.Select(propiedad => MapperPropiedadDto.MapToPropiedadDto(propiedad)).ToList();
+			return propiedadesDTO;
+		}
+	}
 }

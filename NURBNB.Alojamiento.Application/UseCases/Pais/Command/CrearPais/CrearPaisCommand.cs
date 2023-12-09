@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Application.UseCases.Pais.Command.CrearPais
 {
-    public class CrearPaisCommand : IRequest<Guid>
-    {
-        public string Nombre { get; set; }
-        public string CodigoPais 
-        { get; set; }
-    }
+	public class CrearPaisCommand : IRequest<Guid>
+	{
+		public string Nombre { get; set; }
+		public string CodigoPais
+		{ get; set; }
+	}
 }

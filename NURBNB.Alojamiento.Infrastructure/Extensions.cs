@@ -25,152 +25,152 @@ using static System.Formats.Asn1.AsnWriter;
 
 namespace NURBNB.Alojamiento.Infrastructure
 {
-    public static class Extensions
-    {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration, bool isDevelopment)
-        {
-            services.AddApplicaction();
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-            services.AddConsulConfig(configuration);
-            AddDatabase(services, configuration, isDevelopment);
-            AddMassTransitWithRabbitMq(services, configuration); 
-            return services;
-        }
+	public static class Extensions
+	{
+		public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration, bool isDevelopment)
+		{
+			services.AddApplicaction();
+			services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+			services.AddConsulConfig(configuration);
+			AddDatabase(services, configuration, isDevelopment);
+			AddMassTransitWithRabbitMq(services, configuration);
+			return services;
+		}
 
-        private static void AddDatabase(IServiceCollection services, IConfiguration configuration, bool isDevelopment)
-        {
-            services.AddApplicaction();
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-            var connectionString =
-                    configuration.GetConnectionString("AlojamientoDbConnectionString");
-            services.AddDbContext<ReadDbContext>(context =>
-                    context.UseSqlServer(connectionString));
-            services.AddDbContext<WriteDbContext>(context =>
-                context.UseSqlServer(connectionString));
+		private static void AddDatabase(IServiceCollection services, IConfiguration configuration, bool isDevelopment)
+		{
+			services.AddApplicaction();
+			services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+			var connectionString =
+					configuration.GetConnectionString("AlojamientoDbConnectionString");
+			services.AddDbContext<ReadDbContext>(context =>
+					context.UseSqlServer(connectionString));
+			services.AddDbContext<WriteDbContext>(context =>
+				context.UseSqlServer(connectionString));
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IPaisRepository, PaisRepository>();
-            services.AddScoped<ICiudadRepository, CiudadRepository>();
-            services.AddScoped<IPropiedadRepository, PropiedadRepository>();
-            services.AddScoped<IComodidadRepository, ComodidadRepository>();
-            services.AddScoped<IDireccionRepository, DireccionRepository>();
-            services.AddScoped<IPropiedadComodidadRepository, PropiedadComodidadRepository>();
+			services.AddScoped<IUnitOfWork, UnitOfWork>();
+			services.AddScoped<IPaisRepository, PaisRepository>();
+			services.AddScoped<ICiudadRepository, CiudadRepository>();
+			services.AddScoped<IPropiedadRepository, PropiedadRepository>();
+			services.AddScoped<IComodidadRepository, ComodidadRepository>();
+			services.AddScoped<IDireccionRepository, DireccionRepository>();
+			services.AddScoped<IPropiedadComodidadRepository, PropiedadComodidadRepository>();
 
-            using var scope = services.BuildServiceProvider().CreateScope();
-            if (!isDevelopment)
-            {
-                var context = scope.ServiceProvider.GetRequiredService<ReadDbContext>();
-                context.Database.Migrate();
-            }
+			using var scope = services.BuildServiceProvider().CreateScope();
+			if (!isDevelopment)
+			{
+				var context = scope.ServiceProvider.GetRequiredService<ReadDbContext>();
+				context.Database.Migrate();
+			}
 
-            var readContext = scope.ServiceProvider.GetRequiredService<ReadDbContext>();
-            if (!readContext.Database.GetPendingMigrations().Any() && 
-                readContext.Database.GetMigrations().Any())
-            {
-                InitDatabase(services);
-            }
-        }
+			var readContext = scope.ServiceProvider.GetRequiredService<ReadDbContext>();
+			if (!readContext.Database.GetPendingMigrations().Any() &&
+				readContext.Database.GetMigrations().Any())
+			{
+				InitDatabase(services);
+			}
+		}
 
-        public static void InitDatabase(IServiceCollection services)
-        {
-            using var scope = services.BuildServiceProvider().CreateScope();
-            var context = scope.ServiceProvider.GetRequiredService<WriteDbContext>();
-            try
-            {
-                var jsonData1 = File.ReadAllText("PaisesCiudades.json");
-                if (!context.Pais.Any())
-                {
-                    var jsonData = File.ReadAllText("PaisesCiudades.json");
-                    var paisesCiudades = JsonConvert.DeserializeObject<PaisCiudadesDto>(jsonData);
-                    List<Pais> paises = new List<Pais>();
-                    foreach (var paisDto in paisesCiudades.data)
-                    {
-                        Pais pais = new Pais(paisDto.country, paisDto.iso2);
-                        foreach (var ciudadNombre in paisDto.cities)
-                        {
-                            pais.AgregarCiudad(ciudadNombre);
-                        }
-                        paises.Add(pais);
-                        context.Ciudad.AddRange(pais.Ciudades);
-                    }
-                    context.Pais.AddRange(paises);
-                    context.SaveChanges();
-                }
-            }catch (Exception ex)
-            {
+		public static void InitDatabase(IServiceCollection services)
+		{
+			using var scope = services.BuildServiceProvider().CreateScope();
+			var context = scope.ServiceProvider.GetRequiredService<WriteDbContext>();
+			try
+			{
+				if (!context.Pais.Any())
+				{
+					var jsonData = File.ReadAllText("PaisesCiudades.json");
+					var paisesCiudades = JsonConvert.DeserializeObject<PaisCiudadesDto>(jsonData);
+					List<Pais> paises = new();
+					foreach (var paisDto in paisesCiudades!.data)
+					{
+						Pais pais = new(paisDto.country, paisDto.iso2);
+						foreach (var ciudadNombre in paisDto.cities)
+						{
+							pais.AgregarCiudad(ciudadNombre);
+						}
+						paises.Add(pais);
+						context.Ciudad.AddRange(pais.Ciudades);
+					}
+					context.Pais.AddRange(paises);
+					context.SaveChanges();
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.Write(ex.ToString());
+			}
+		}
 
-            }          
-        }
+		private static IServiceCollection AddMassTransitWithRabbitMq(IServiceCollection services, IConfiguration configuration)
+		{
+			var serviceName = configuration.GetValue<string>("ServiceName");
+			var rabbitMQSettings = configuration.GetSection(nameof(RabbitMQSettings)).Get<RabbitMQSettings>();
 
-        private static IServiceCollection AddMassTransitWithRabbitMq(IServiceCollection services, IConfiguration configuration)
-        {
-            //services.AddScoped<IBusService, MassTransitBusService>();
+			services.AddMassTransit(configure =>
+			{
+				configure.AddConsumer<ReservaFinalizadaConsumer>();
+				configure.AddConsumer<ReservaRegistradaConsumer>();
+				configure.AddConsumer<CheckOutFinalizadoConsumer>();
+				configure.UsingRabbitMq((context, configurator) =>
+				{
+					bool IsRunningInContainer = bool.TryParse(Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER"), out var inDocker) && inDocker;
+					var host = IsRunningInContainer ? "rabbitmq" : "localhost";
+					configurator.Host(host);
+					configurator.ConfigureEndpoints(context, new KebabCaseEndpointNameFormatter(serviceName, false));
+					configurator.UseMessageRetry(retryConfigurator =>
+					{
+						retryConfigurator.Interval(3, TimeSpan.FromSeconds(5));
+					});
+				});
+			});
 
-            var serviceName = configuration.GetValue<string>("ServiceName");
-            var rabbitMQSettings = configuration.GetSection(nameof(RabbitMQSettings)).Get<RabbitMQSettings>();
+			return services;
+		}
 
-            services.AddMassTransit(configure =>
-            {
-                configure.AddConsumer<ReservaFinalizadaConsumer>();
-                configure.AddConsumer<ReservaRegistradaConsumer>();
-                configure.AddConsumer<CheckOutFinalizadoConsumer>();
-                configure.UsingRabbitMq((context, configurator) =>
-                {
-                    bool IsRunningInContainer = bool.TryParse(Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER"), out var inDocker) && inDocker;
-                    var host = IsRunningInContainer ? "rabbitmq" : "localhost";
-                    configurator.Host(host);
-                    configurator.ConfigureEndpoints(context, new KebabCaseEndpointNameFormatter(serviceName, false));
-                    configurator.UseMessageRetry(retryConfigurator =>
-                    {
-                        retryConfigurator.Interval(3, TimeSpan.FromSeconds(5));
-                    });
-                });
-            });
+		public static IServiceCollection AddConsulConfig(this IServiceCollection services, IConfiguration configuration)
+		{
+			services.AddSingleton<IConsulClient, ConsulClient>(p => new ConsulClient(consulConfig =>
+			{
+				var configSettings = configuration.GetSection(nameof(ConfigurationSetting)).Get<ConfigurationSetting>();
+				if (configSettings != null)
+				{
+					var address = configSettings.ConsulAddresss;
+					consulConfig.Address = new Uri(address);
+				}
+			}));
+			return services;
+		}
 
-            return services;
-        }
+		public static IApplicationBuilder UseConsul(this IApplicationBuilder app, IConfiguration configuration)
+		{
+			var consulClient = app.ApplicationServices.GetRequiredService<IConsulClient>();
+			var logger = app.ApplicationServices.GetRequiredService<ILoggerFactory>().CreateLogger("AppExtensions");
+			var lifetime = app.ApplicationServices.GetRequiredService<IApplicationLifetime>();
 
-        public static IServiceCollection AddConsulConfig(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddSingleton<IConsulClient, ConsulClient>(p => new ConsulClient(consulConfig =>
-            {
-                var configSettings = configuration.GetSection(nameof(ConfigurationSetting)).Get<ConfigurationSetting>();
-                var address = configSettings.ConsulAddresss;
-                consulConfig.Address = new Uri(address);
-            }));
-            return services;
-        }
+			var configSettings = configuration.GetSection(nameof(ConfigurationSetting)).Get<ConfigurationSetting>();
+			var serviceName = configSettings!.ServiceName;
+			var serviceHost = configSettings.ServiceHost;
+			var servicePort = configSettings.ServicePort;
+			var registration = new AgentServiceRegistration()
+			{
+				ID = serviceName, //{uri.Port}",
+								  // servie name  
+				Name = serviceName,
+				Address = serviceHost, //$"{uri.Host}",
+				Port = servicePort  // uri.Port
+			};
 
-        public static IApplicationBuilder UseConsul(this IApplicationBuilder app, IConfiguration configuration)
-        {
-            var consulClient = app.ApplicationServices.GetRequiredService<IConsulClient>();
-            var logger = app.ApplicationServices.GetRequiredService<ILoggerFactory>().CreateLogger("AppExtensions");
-            var lifetime = app.ApplicationServices.GetRequiredService<IApplicationLifetime>();
+			logger.LogInformation("Registering with Consul");
+			consulClient.Agent.ServiceDeregister(registration.ID).ConfigureAwait(true);
+			consulClient.Agent.ServiceRegister(registration).ConfigureAwait(true);
 
-            //var uri = new Uri(address);
-            var configSettings = configuration.GetSection(nameof(ConfigurationSetting)).Get<ConfigurationSetting>();
-            var serviceName = configSettings!.ServiceName;
-            var serviceHost = configSettings.ServiceHost;
-            var servicePort = configSettings.ServicePort;
-            var registration = new AgentServiceRegistration()
-            {
-                ID = serviceName, //{uri.Port}",
-                // servie name  
-                Name = serviceName,
-                Address = serviceHost, //$"{uri.Host}",
-                Port = servicePort  // uri.Port
-            };
+			lifetime.ApplicationStopping.Register(() =>
+			{
+				logger.LogInformation("Unregistering from Consul");
+			});
 
-            logger.LogInformation("Registering with Consul");
-            consulClient.Agent.ServiceDeregister(registration.ID).ConfigureAwait(true);
-            consulClient.Agent.ServiceRegister(registration).ConfigureAwait(true);
-
-            lifetime.ApplicationStopping.Register(() =>
-            {
-                logger.LogInformation("Unregistering from Consul");
-            });
-
-            return app;
-        }
-    }
+			return app;
+		}
+	}
 }

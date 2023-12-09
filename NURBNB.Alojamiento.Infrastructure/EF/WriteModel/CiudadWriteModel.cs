@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Infrastructure.EF.WriteModel
 {
-    internal class CiudadWriteModel
-    {
-    }
+	internal class CiudadWriteModel
+	{
+	}
 }

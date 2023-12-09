@@ -11,24 +11,24 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Infrastructure.MassTransit.Consumers
 {
-    public class ReservaFinalizadaConsumer : IConsumer<ReservaFinalizada>
-    {
-        private readonly IMediator _mediator;
+	public class ReservaFinalizadaConsumer : IConsumer<ReservaFinalizada>
+	{
+		private readonly IMediator _mediator;
 
-        public ReservaFinalizadaConsumer(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
+		public ReservaFinalizadaConsumer(IMediator mediator)
+		{
+			_mediator = mediator;
+		}
 
-        public async Task Consume(ConsumeContext<ReservaFinalizada> context)
-        {
-            var message = context.Message;
-            var command = new ModificarReservaPropiedadCommand
-            {
-                ReservaId = message.ReservaId,
-                Estado = Domain.Model.Alojamiento.EstadoReserva.Finalizada
-            };
-            await _mediator.Send(command);
-        }
-    }
+		public async Task Consume(ConsumeContext<ReservaFinalizada> context)
+		{
+			var message = context.Message;
+			var command = new ModificarReservaPropiedadCommand
+			{
+				ReservaId = message.ReservaId,
+				Estado = Domain.Model.Alojamiento.EstadoReserva.Finalizada
+			};
+			await _mediator.Send(command);
+		}
+	}
 }

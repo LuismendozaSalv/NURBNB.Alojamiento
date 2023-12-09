@@ -6,39 +6,39 @@ using NURBNB.Alojamiento.Application.UseCases.Pais.Query.GetPaisList;
 
 namespace NURBNB.Alojamiento.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class PaisController : ControllerBase
-    {
-        private readonly IMediator _mediator;
-        public PaisController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CrearPaisCommand command)
-        {
-            try
-            {
-                var paisId = await _mediator.Send(command);
-                return Ok(paisId);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
+	[Route("api/[controller]")]
+	[ApiController]
+	public class PaisController : ControllerBase
+	{
+		private readonly IMediator _mediator;
+		public PaisController(IMediator mediator)
+		{
+			_mediator = mediator;
+		}
+		[HttpPost]
+		public async Task<IActionResult> Post([FromBody] CrearPaisCommand command)
+		{
+			try
+			{
+				var paisId = await _mediator.Send(command);
+				return Ok(paisId);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
 
-            }
-        }
+			}
+		}
 
-        [HttpGet]
-        public async Task<IActionResult> SearchCountries(string searchTerm = "")
-        {
-            var items = await _mediator.Send(new GetPaisQueryList ()
-            {
-                SearchTerm = searchTerm
-            });
+		[HttpGet]
+		public async Task<IActionResult> SearchCountries(string searchTerm = "")
+		{
+			var items = await _mediator.Send(new GetPaisQueryList()
+			{
+				SearchTerm = searchTerm
+			});
 
-            return Ok(items);
-        }
-    }
+			return Ok(items);
+		}
+	}
 }

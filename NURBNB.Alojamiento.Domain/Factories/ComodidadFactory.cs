@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Domain.Factories
 {
-    public class ComodidadFactory : IComodidadFactory
-    {
-        public Comodidad Crear(string nombre, string descripcion)
-        {
-            return new Comodidad(nombre, descripcion);
-        }
-    }
+	public class ComodidadFactory : IComodidadFactory
+	{
+		public Comodidad Crear(string nombre, string descripcion)
+		{
+			return new Comodidad(nombre, descripcion);
+		}
+	}
 }

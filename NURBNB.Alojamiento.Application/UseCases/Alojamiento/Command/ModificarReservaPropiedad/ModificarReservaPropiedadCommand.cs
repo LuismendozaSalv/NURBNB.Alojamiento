@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.ModificarReservaPropiedad
 {
-    public class ModificarReservaPropiedadCommand : IRequest<Guid>
-    {
-        public Guid ReservaId { get; set; }
-        public EstadoReserva Estado { get; set; }
-    }
+	public class ModificarReservaPropiedadCommand : IRequest<Guid>
+	{
+		public Guid ReservaId { get; set; }
+		public EstadoReserva Estado { get; set; }
+	}
 }

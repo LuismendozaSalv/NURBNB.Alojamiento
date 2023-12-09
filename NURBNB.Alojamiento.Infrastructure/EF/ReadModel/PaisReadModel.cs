@@ -8,21 +8,21 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Infrastructure.EF.ReadModel
 {
-    [Table("pais")]
-    public class PaisReadModel
-    {
-        [Key]
-        [Column("paisId")]
-        public Guid Id { get; set; }
+	[Table("pais")]
+	public class PaisReadModel
+	{
+		[Key]
+		[Column("paisId")]
+		public Guid Id { get; set; }
 
-        [Column("nombre")]
-        [StringLength(250)]
-        [Required]
-        public string Nombre { get; set; }
+		[Column("nombre")]
+		[StringLength(250)]
+		[Required]
+		public string Nombre { get; set; }
 
-        [Column("paisCode")]
-        [StringLength(10)]
-        [Required]
-        public string CodigoPais { get; set; }
-    }
+		[Column("paisCode")]
+		[StringLength(10)]
+		[Required]
+		public string CodigoPais { get; set; }
+	}
 }

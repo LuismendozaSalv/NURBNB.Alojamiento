@@ -15,6 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NURBNB.Alojamiento.Test", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NURBNB.IntegrationEvents", "NURBNB.IntegrationEvents\NURBNB.IntegrationEvents\NURBNB.IntegrationEvents.csproj", "{5492DBD8-51DF-4720-BB3B-DEA5064CA336}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7C66D9E6-C4A1-4B8D-A97E-C6B0719AD859}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

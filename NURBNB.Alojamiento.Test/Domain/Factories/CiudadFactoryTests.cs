@@ -10,31 +10,31 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Test.Domain.Factories
 {
-    public class CiudadFactoryTests
-    {
-        [Fact]
-        public async Task Crear_ReturnsCiudadInstanceWithCorrectValues()
-        {
-            // Arrange
-            string nombre = "Ciudad Ejemplo";
-            Guid paisId = Guid.NewGuid();
+	public class CiudadFactoryTests
+	{
+		[Fact]
+		public async Task Crear_ReturnsCiudadInstanceWithCorrectValues()
+		{
+			// Arrange
+			string nombre = "Ciudad Ejemplo";
+			Guid paisId = Guid.NewGuid();
 
-            // Crear un mock del IPaisRepository
-            var mockPaisRepository = new Mock<IPaisRepository>();
+			// Crear un mock del IPaisRepository
+			var mockPaisRepository = new Mock<IPaisRepository>();
 
-            // Configurar el comportamiento del mock para que devuelva un objeto Pais ficticio
-            var paisFicticio = new Pais("País Ejemplo", "PE");
-            mockPaisRepository.Setup(repo => repo.FindByIdAsync(It.IsAny<Guid>())).ReturnsAsync(paisFicticio);
+			// Configurar el comportamiento del mock para que devuelva un objeto Pais ficticio
+			var paisFicticio = new Pais("País Ejemplo", "PE");
+			mockPaisRepository.Setup(repo => repo.FindByIdAsync(It.IsAny<Guid>())).ReturnsAsync(paisFicticio);
 
-            CiudadFactory factory = new CiudadFactory(mockPaisRepository.Object);
+			CiudadFactory factory = new CiudadFactory(mockPaisRepository.Object);
 
-            // Act
-            Ciudad ciudad = await factory.Crear(nombre, paisId);
+			// Act
+			Ciudad ciudad = await factory.Crear(nombre, paisId);
 
-            // Assert
-            Assert.NotNull(ciudad);
-            Assert.Equal(nombre, ciudad.Name);
-            Assert.Equal(paisFicticio, ciudad.Country);
-        }
-    }
+			// Assert
+			Assert.NotNull(ciudad);
+			Assert.Equal(nombre, ciudad.Name);
+			Assert.Equal(paisFicticio, ciudad.Country);
+		}
+	}
 }

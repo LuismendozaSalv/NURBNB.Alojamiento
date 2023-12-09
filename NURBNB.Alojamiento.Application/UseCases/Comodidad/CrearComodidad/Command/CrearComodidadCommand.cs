@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Application.UseCases.Comodidad.AgregarComodidad.Command
 {
-    public class CrearComodidadCommand : IRequest<Guid>
-    {
-        public string Nombre { get; set; }
-        public string Descripcion { get; set; }
-    }
+	public class CrearComodidadCommand : IRequest<Guid>
+	{
+		public string Nombre { get; set; }
+		public string Descripcion { get; set; }
+	}
 }

@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Application.UseCases.Pais.Query.GetPaisList
 {
-    public class GetPaisQueryList : IRequest<ICollection<PaisDto>>
-    {
-        public string? SearchTerm { get; set; }
-    }
+	public class GetPaisQueryList : IRequest<ICollection<PaisDto>>
+	{
+		public string? SearchTerm { get; set; }
+	}
 }

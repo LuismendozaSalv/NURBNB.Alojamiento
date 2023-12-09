@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Application.Dto
 {
-    public class FotoDto
-    {
-        public string Url { get; init; }
-    }
+	public class FotoDto
+	{
+		public string Url { get; init; }
+	}
 }

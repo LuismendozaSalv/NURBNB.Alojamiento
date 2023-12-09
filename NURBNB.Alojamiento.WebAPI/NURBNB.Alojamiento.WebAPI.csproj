@@ -18,4 +18,12 @@
     <ProjectReference Include="..\NURBNB.Alojamiento.Infrastructure\NURBNB.Alojamiento.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\Diandra\source\repos\NURBNB.Alojamiento\NURBNB.Alojamiento.WebAPI\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\Diandra\source\repos\NURBNB.Alojamiento\NURBNB.Alojamiento.WebAPI\.editorconfig" />
+  </ItemGroup>
+
 </Project>

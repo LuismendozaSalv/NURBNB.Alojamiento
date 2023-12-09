@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Application.Dto
 {
-    public class ReglaDto
-    {
-        public string Value { get; set; }
-    }
+	public class ReglaDto
+	{
+		public string Value { get; set; }
+	}
 }

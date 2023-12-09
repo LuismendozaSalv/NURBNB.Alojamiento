@@ -10,28 +10,28 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Infrastructure.EF.Repositories
 {
-    public class ComodidadRepository : IComodidadRepository
-    {
-        private readonly WriteDbContext _context;
+	public class ComodidadRepository : IComodidadRepository
+	{
+		private readonly WriteDbContext _context;
 
-        public ComodidadRepository(WriteDbContext context)
-        {
-            _context = context;
-        }
-        public async Task CreateAsync(Comodidad obj)
-        {
-            await _context.Comodidad.AddAsync(obj);
-        }
+		public ComodidadRepository(WriteDbContext context)
+		{
+			_context = context;
+		}
+		public async Task CreateAsync(Comodidad obj)
+		{
+			await _context.Comodidad.AddAsync(obj);
+		}
 
-        public async Task<Comodidad?> FindByIdAsync(Guid id)
-        {
-            return await _context.Comodidad.FindAsync(id);
-        }
+		public async Task<Comodidad?> FindByIdAsync(Guid id)
+		{
+			return await _context.Comodidad.FindAsync(id);
+		}
 
-        public Task UpdateAsync(Comodidad comodidad)
-        {
-            _context.Comodidad.Update(comodidad);
-            return Task.CompletedTask;
-        }
-    }
+		public Task UpdateAsync(Comodidad comodidad)
+		{
+			_context.Comodidad.Update(comodidad);
+			return Task.CompletedTask;
+		}
+	}
 }
