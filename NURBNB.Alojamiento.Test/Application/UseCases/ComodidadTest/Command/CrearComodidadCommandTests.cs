@@ -7,25 +7,25 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Test.Application.UseCases.ComodidadTest.Command
 {
-    public class CrearComodidadCommandTests
-    {
-        [Fact]
-        public void CrearComodidadCommand_Valida_Inicializacion()
-        {
-            // Arrange
-            string nombre = "Comodidad Ejemplo";
-            string descripcion = "Descripción de la comodidad";
+	public class CrearComodidadCommandTests
+	{
+		[Fact]
+		public void CrearComodidadCommand_Valida_Inicializacion()
+		{
+			// Arrange
+			string nombre = "Comodidad Ejemplo";
+			string descripcion = "Descripción de la comodidad";
 
-            // Act
-            var crearComodidadCommand = new CrearComodidadCommand
-            {
-                Nombre = nombre,
-                Descripcion = descripcion
-            };
+			// Act
+			var crearComodidadCommand = new CrearComodidadCommand
+			{
+				Nombre = nombre,
+				Descripcion = descripcion
+			};
 
-            // Assert
-            Assert.Equal(nombre, crearComodidadCommand.Nombre);
-            Assert.Equal(descripcion, crearComodidadCommand.Descripcion);
-        }
-    }
+			// Assert
+			Assert.Equal(nombre, crearComodidadCommand.Nombre);
+			Assert.Equal(descripcion, crearComodidadCommand.Descripcion);
+		}
+	}
 }

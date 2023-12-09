@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Application.UseCases.Alojamiento.Command.AgregarReglasPropiedad
 {
-    public class AgregarReglasPropiedadCommand : IRequest<Guid>
-    {
-        public Guid PropiedadId { get; set; }
-        public List<ReglaDto> Reglas { get; set; }
-    }
+	public class AgregarReglasPropiedadCommand : IRequest<Guid>
+	{
+		public Guid PropiedadId { get; set; }
+		public List<ReglaDto> Reglas { get; set; }
+	}
 }

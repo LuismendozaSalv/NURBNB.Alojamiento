@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Application.UseCases.Ciudad.Command.CrearCiudad
 {
-    public class CrearCiudadCommand : IRequest<Guid>
-    {
-        public string Nombre { get; set; }
-        public Guid PaisId { get; set; }
-    }
+	public class CrearCiudadCommand : IRequest<Guid>
+	{
+		public string Nombre { get; set; }
+		public Guid PaisId { get; set; }
+	}
 }

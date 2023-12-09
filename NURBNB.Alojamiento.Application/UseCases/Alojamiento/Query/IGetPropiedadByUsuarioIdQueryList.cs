@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Application.UseCases.Alojamiento.Query
 {
-    public class IGetPropiedadByUsuarioIdQueryList : IRequest<ICollection<PropiedadDto>>
-    {
-        public Guid UsuarioId { get; set; }
-    }
+	public class IGetPropiedadByUsuarioIdQueryList : IRequest<ICollection<PropiedadDto>>
+	{
+		public Guid UsuarioId { get; set; }
+	}
 }

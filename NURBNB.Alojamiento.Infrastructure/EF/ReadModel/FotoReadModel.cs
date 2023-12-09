@@ -10,20 +10,20 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace NURBNB.Alojamiento.Infrastructure.EF.ReadModel
 {
-    [Table("foto")]
-    public class FotoReadModel
-    {
-        [Key]
-        [Column("Id")]
-        public Guid Id { get; set; }
+	[Table("foto")]
+	public class FotoReadModel
+	{
+		[Key]
+		[Column("Id")]
+		public Guid Id { get; set; }
 
-        [Required]
-        [Column("propiedadId")]
-        public Guid PropiedadId { get; set; }
+		[Required]
+		[Column("propiedadId")]
+		public Guid PropiedadId { get; set; }
 
-        [Column("url")]
-        [StringLength(250)]
-        [Required]
-        public string Url { get; set; }
-    }
+		[Column("url")]
+		[StringLength(250)]
+		[Required]
+		public string Url { get; set; }
+	}
 }

@@ -1,0 +1,27 @@
+{
+  "name": "nurbnb.alojamiento",
+  "version": "1.0.0",
+  "description": "Microservicio de alojamiento",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuismendozaSalv/NURBNB.Alojamiento.git"
+  },
+  "author": "LuismendozaSalv",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LuismendozaSalv/NURBNB.Alojamiento/issues"
+  },
+  "homepage": "https://github.com/LuismendozaSalv/NURBNB.Alojamiento#readme",
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0"
+  },
+  "lint-staged": {
+    "*.cs": "dotnet format whitespace --include **/*.cs"
+  }
+}

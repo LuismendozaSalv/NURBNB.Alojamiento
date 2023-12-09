@@ -8,44 +8,44 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Infrastructure.EF.ReadModel
 {
-    [Table("direccion")]
-    public class DireccionReadModel
-    {
-        [Key]
-        [Column("Id")]
-        public Guid Id { get; set; }
+	[Table("direccion")]
+	public class DireccionReadModel
+	{
+		[Key]
+		[Column("Id")]
+		public Guid Id { get; set; }
 
-        [Required]
-        [Column("propiedadId")]
-        public Guid PropiedadId { get; set; }
-        public PropiedadReadModel Propiedad { get; set; }
+		[Required]
+		[Column("propiedadId")]
+		public Guid PropiedadId { get; set; }
+		public PropiedadReadModel Propiedad { get; set; }
 
-        [Column("calle")]
-        [StringLength(150)]
-        [Required]
-        public string Calle { get; set; }
+		[Column("calle")]
+		[StringLength(150)]
+		[Required]
+		public string Calle { get; set; }
 
-        [Column("avenida")]
-        [StringLength(150)]
-        [Required]
-        public string Avenida { get; set; }
+		[Column("avenida")]
+		[StringLength(150)]
+		[Required]
+		public string Avenida { get; set; }
 
-        [Column("referencia")]
-        [StringLength(150)]
-        [Required]
-        public string Referencia { get; set; }
+		[Column("referencia")]
+		[StringLength(150)]
+		[Required]
+		public string Referencia { get; set; }
 
-        [Column("latitud")]
-        [Required]
-        public double Latitud { get; set; }
+		[Column("latitud")]
+		[Required]
+		public double Latitud { get; set; }
 
-        [Column("longitud")]
-        [Required]
-        public double Longitud { get; set; }
+		[Column("longitud")]
+		[Required]
+		public double Longitud { get; set; }
 
-        [Required]
-        [Column("ciudadId")]
-        public Guid CiudadId { get; set; }
-        public CiudadReadModel Ciudad { get; set; }
-    }
+		[Required]
+		[Column("ciudadId")]
+		public Guid CiudadId { get; set; }
+		public CiudadReadModel Ciudad { get; set; }
+	}
 }

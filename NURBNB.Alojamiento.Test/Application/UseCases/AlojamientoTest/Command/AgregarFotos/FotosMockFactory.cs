@@ -8,14 +8,15 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Test.Application.UseCases.AlojamientoTest.Command.AgregarFotos
 {
-    internal class FotosMockFactory
-    {
-        public static Propiedad AddFotos(Propiedad propiedad, List<FotoDto> fotos)
-        {
-            foreach(FotoDto foto in fotos) {
-                propiedad.AgregarFoto(foto.Url);
-            }
-            return propiedad;
-        }
-    }
+	internal class FotosMockFactory
+	{
+		public static Propiedad AddFotos(Propiedad propiedad, List<FotoDto> fotos)
+		{
+			foreach (FotoDto foto in fotos)
+			{
+				propiedad.AgregarFoto(foto.Url);
+			}
+			return propiedad;
+		}
+	}
 }

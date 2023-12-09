@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
 {
-    public enum EstadoReserva
-    {
-        Pendiente,
-        Confirmada,
-        Finalizada,
-        Cancelada
-    }
+	public enum EstadoReserva
+	{
+		Pendiente,
+		Confirmada,
+		Finalizada,
+		Cancelada
+	}
 }

@@ -1,0 +1,3 @@
+# Configuración para forzar el uso de tabs en lugar de espacios solo para archivos C#
+[*.cs]
+indent_style = tab

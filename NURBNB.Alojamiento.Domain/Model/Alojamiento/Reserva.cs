@@ -7,27 +7,27 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
 {
-    public class Reserva : Entity
-    {
-        public DateTime FechaEntrada { get; private set; }
-        public DateTime FechaSalida { get; private set; }
-        public EstadoReserva EstadoReserva { get; private set; }
-        internal Reserva()
-        {
+	public class Reserva : Entity
+	{
+		public DateTime FechaEntrada { get; private set; }
+		public DateTime FechaSalida { get; private set; }
+		public EstadoReserva EstadoReserva { get; private set; }
+		internal Reserva()
+		{
 
-        }
+		}
 
-        internal Reserva(Guid reservaId, DateTime fechaEntrada, DateTime fechaSalida, EstadoReserva estado)
-        {
-            Id = reservaId;
-            FechaEntrada = fechaEntrada;
-            FechaSalida = fechaSalida;
-            EstadoReserva = estado;
-        }
+		internal Reserva(Guid reservaId, DateTime fechaEntrada, DateTime fechaSalida, EstadoReserva estado)
+		{
+			Id = reservaId;
+			FechaEntrada = fechaEntrada;
+			FechaSalida = fechaSalida;
+			EstadoReserva = estado;
+		}
 
-        public void Editar(EstadoReserva estado)
-        {
-            EstadoReserva = estado;
-        }
-    }
+		public void Editar(EstadoReserva estado)
+		{
+			EstadoReserva = estado;
+		}
+	}
 }

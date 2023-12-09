@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Infrastructure.EF.ReadModel
 {
-    [Table("regla")]
-    public class ReglaReadModel
-    {
-        [Key]
-        [Column("Id")]
-        public Guid Id { get; set; }
+	[Table("regla")]
+	public class ReglaReadModel
+	{
+		[Key]
+		[Column("Id")]
+		public Guid Id { get; set; }
 
-        [Required]
-        [Column("propiedadId")]
-        public Guid PropiedadId { get; set; }
+		[Required]
+		[Column("propiedadId")]
+		public Guid PropiedadId { get; set; }
 
-        [Column("Value")]
-        [StringLength(250)]
-        [Required]
-        public string Value { get; set; }
-    }
+		[Column("Value")]
+		[StringLength(250)]
+		[Required]
+		public string Value { get; set; }
+	}
 }

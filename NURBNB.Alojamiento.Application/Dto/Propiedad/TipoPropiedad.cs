@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Application.Dto.Propiedad
 {
-    public enum TipoPropiedad
-    {
-        Apartamento = 0,
-        Casa = 1,
-        Habitacion = 2
-    }
+	public enum TipoPropiedad
+	{
+		Apartamento = 0,
+		Casa = 1,
+		Habitacion = 2
+	}
 }

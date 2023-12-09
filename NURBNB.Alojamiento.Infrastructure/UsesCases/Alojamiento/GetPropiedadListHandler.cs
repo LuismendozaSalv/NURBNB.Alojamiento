@@ -16,27 +16,27 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Infrastructure.UsesCases.Alojamiento
 {
-    internal class GetPropiedadListHandler : IRequestHandler<IGetPropiedadQueryList, ICollection<PropiedadDto>>
-    {
-        private IPropiedadRepository _propiedadRepository;
+	internal class GetPropiedadListHandler : IRequestHandler<IGetPropiedadQueryList, ICollection<PropiedadDto>>
+	{
+		private readonly IPropiedadRepository _propiedadRepository;
 
-        public GetPropiedadListHandler(IPropiedadRepository propiedadRepository)
-        {
-            _propiedadRepository = propiedadRepository;
-        }
-        
-        public async Task<ICollection<PropiedadDto>> Handle(IGetPropiedadQueryList request, CancellationToken cancellationToken)
-        {
-            
-            if (!string.IsNullOrWhiteSpace(request.CiudadTerm))
-            {
-                
-                var propiedades = _propiedadRepository.FindByCityName(request.CiudadTerm).Result;
-                var propiedadesDTO = propiedades.Select(propiedad => MapperPropiedadDto.MapToPropiedadDto(propiedad)).ToList();
-                return propiedadesDTO;
-            }
+		public GetPropiedadListHandler(IPropiedadRepository propiedadRepository)
+		{
+			_propiedadRepository = propiedadRepository;
+		}
 
-            return new List<PropiedadDto>();
-        }
-    }
+		public async Task<ICollection<PropiedadDto>> Handle(IGetPropiedadQueryList request, CancellationToken cancellationToken)
+		{
+
+			if (!string.IsNullOrWhiteSpace(request.CiudadTerm))
+			{
+
+				var propiedades = _propiedadRepository.FindByCityName(request.CiudadTerm).Result;
+				var propiedadesDTO = propiedades.Select(propiedad => MapperPropiedadDto.MapToPropiedadDto(propiedad)).ToList();
+				return propiedadesDTO;
+			}
+
+			return new List<PropiedadDto>();
+		}
+	}
 }

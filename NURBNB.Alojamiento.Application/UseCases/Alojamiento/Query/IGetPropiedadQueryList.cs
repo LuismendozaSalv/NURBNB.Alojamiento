@@ -4,8 +4,8 @@ using NURBNB.Alojamiento.Domain.Model.Alojamiento;
 
 namespace NURBNB.Alojamiento.Application.UseCases.Alojamiento.Query
 {
-    public class IGetPropiedadQueryList : IRequest<ICollection<PropiedadDto>>
-    {
-        public string? CiudadTerm { get; set; }
-    }
+	public class IGetPropiedadQueryList : IRequest<ICollection<PropiedadDto>>
+	{
+		public string? CiudadTerm { get; set; }
+	}
 }

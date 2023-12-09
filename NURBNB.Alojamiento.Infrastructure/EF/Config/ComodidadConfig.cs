@@ -9,24 +9,24 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Infrastructure.EF.Config
 {
-    public class ComodidadConfig : IEntityTypeConfiguration<Comodidad>
-    {
-        public void Configure(EntityTypeBuilder<Comodidad> builder)
-        {
-            builder.ToTable("comodidad");
-            builder.HasKey(x => x.Id);
+	public class ComodidadConfig : IEntityTypeConfiguration<Comodidad>
+	{
+		public void Configure(EntityTypeBuilder<Comodidad> builder)
+		{
+			builder.ToTable("comodidad");
+			builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Id)
-                .HasColumnName("comodidadId");
+			builder.Property(x => x.Id)
+				.HasColumnName("comodidadId");
 
-            builder.Property(x => x.Nombre)
-                .HasColumnName("nombre");
+			builder.Property(x => x.Nombre)
+				.HasColumnName("nombre");
 
-            builder.Property(x => x.Descripcion)
-                .HasColumnName("descripcion");
+			builder.Property(x => x.Descripcion)
+				.HasColumnName("descripcion");
 
-            builder.Ignore("_domainEvents");
-            builder.Ignore(x => x.DomainEvents);
-        }
-    }
+			builder.Ignore("_domainEvents");
+			builder.Ignore(x => x.DomainEvents);
+		}
+	}
 }
