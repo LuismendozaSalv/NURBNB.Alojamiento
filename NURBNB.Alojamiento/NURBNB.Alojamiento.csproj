@@ -5,5 +5,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
+<ItemGroup>
+  <None Update="sonar-project.properties" Condition="Exists('sonar-project.properties')">
+    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+  </None>
+</ItemGroup>
 </Project>
