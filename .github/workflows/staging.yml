@@ -1,0 +1,99 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: Staging
+
+on:
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'zulu' # Alternative distribution options are available.
+      - uses: actions/checkout@v3
+        with:
+            fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - uses: actions/checkout@v4.1.1
+        with: 
+          repository: LuismendozaSalv/NURBNB.IntegrationEvents
+          ref: master
+          path: NURBNB.IntegrationEvents
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v3
+        with:
+          path: ~\sonar\cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache SonarCloud scanner
+        id: cache-sonar-scanner
+        uses: actions/cache@v3
+        with:
+            path: .\.sonar\scanner
+            key: ${{ runner.os }}-sonar-scanner
+            restore-keys: ${{ runner.os }}-sonar-scanner
+      - name: Install SonarCloud scanner
+        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+        shell: powershell
+        run: |
+            New-Item -Path .\.sonar\scanner -ItemType Directory
+            dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+      - name: Build and analyze
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        shell: powershell
+        run: |
+            .\.sonar\scanner\dotnet-sonarscanner begin /k:"LuismendozaSalv_NURBNB.Alojamiento" /o:"luismendozasalv" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+            dotnet build --no-restore
+            dotnet test --no-build --verbosity normal
+            .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+  staging:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configure SSH
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
+          SSH_HOST: ${{ secrets.HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          echo "$SSH_KEY" > ~/.ssh/staging.key
+          chmod 600 ~/.ssh/staging.key
+          cat >>~/.ssh/config <<END
+            Host staging
+              HostName $SSH_HOST
+              User $SSH_USER
+              IdentityFile ~/.ssh/staging.key
+              StrictHostKeyChecking no
+          END
+
+      - name: Stop the server
+        run: ssh staging 'cd /var/www/html && bash deploy.sh'
+
+      - name: Do deploy
+        run: ssh staging 'cd /var/www/pedidos-app && bash deploy.sh'
+        
+      - name: Start the server
+        if: ${{ always() }}
+        run: ssh staging 'sudo systemctl start pedidos.service'
+
