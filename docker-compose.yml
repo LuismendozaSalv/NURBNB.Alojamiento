@@ -23,12 +23,6 @@ services:
     ports:
       - "5196:80"
 
-  web_api_usuario:
-    image: klbraguilar/nurbnb-usuario
-    container_name: web_api_usuario
-    ports:
-      - "8001:80"  
-
 networks:
   default:
     driver: bridge
