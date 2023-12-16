@@ -22,6 +22,8 @@ services:
     container_name: web_api_application
     ports:
       - "5196:80"
+    depends_on:
+      - sql
 
 networks:
   default:
