@@ -87,13 +87,5 @@ jobs:
               StrictHostKeyChecking no
           END
 
-      - name: Stop the server
-        run: ssh staging 'cd /var/www/html && bash deploy.sh'
-
       - name: Do deploy
-        run: ssh staging 'cd /var/www/pedidos-app && bash deploy.sh'
-        
-      - name: Start the server
-        if: ${{ always() }}
-        run: ssh staging 'sudo systemctl start pedidos.service'
-
+        run: ssh staging 'cd /var/www/html && bash deploy.sh'
