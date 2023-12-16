@@ -1,4 +1,12 @@
 services:
+  web_api:
+    image: lems2503/nurbnb-alojamiento
+    container_name: web_api_application
+    ports:
+      - "5196:80"
+    depends_on:
+      - sql
+      - rabbitmq
   sql:
     image: "mcr.microsoft.com/mssql/server:2022-latest"
     container_name: sql_server2022
@@ -16,14 +24,6 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-
-  web_api:
-    image: lems2503/nurbnb-alojamiento
-    container_name: web_api_application
-    ports:
-      - "5196:80"
-    depends_on:
-      - sql
 
 networks:
   default:
