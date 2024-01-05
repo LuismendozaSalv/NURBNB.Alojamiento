@@ -1,17 +1,4 @@
 services:
-  web_api:
-    image: lems2503/nurbnb-alojamiento
-    container_name: web_api_application
-    ports:
-      - "5196:80"
-    depends_on:
-      - sql
-      - rabbitmq
-    healthcheck:
-      test: ["CMD", "curl", "--fail", "http://localhost:80/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
   sql:
     image: "mcr.microsoft.com/mssql/server:2022-latest"
     container_name: sql_server2022
@@ -20,15 +7,14 @@ services:
     environment:
       - ACCEPT_EULA=y
       - SA_PASSWORD=A&VeryComplex123Password
-  rabbitmq:
-    image: rabbitmq:3-management
-    container_name: rabbitmq
-    environment:
-      - RABBITMQ_DEFAULT_USER=guest
-      - RABBITMQ_DEFAULT_PASS=guest
+
+  web_api:
+    image: lems2503/nurbnb-alojamiento
+    container_name: web_api_application
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - "5196:80"
+    depends_on:
+      - sql
 
 networks:
   default:
