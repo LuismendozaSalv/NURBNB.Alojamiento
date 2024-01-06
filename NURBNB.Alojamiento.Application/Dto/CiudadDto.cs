@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Application.Dto
 {
-    public class CiudadDto
-    {
-        public Guid Id { get; set; }
-        public string Nombre { get; set; }
-        public Guid PaisId { get; set; }
-        public string NombrePais { get; set; }
-    }
+	public class CiudadDto
+	{
+		public Guid Id { get; set; }
+		public string Nombre { get; set; }
+		public Guid PaisId { get; set; }
+		public string NombrePais { get; set; }
+	}
 }

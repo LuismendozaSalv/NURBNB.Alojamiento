@@ -16,44 +16,44 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Test.Application.UseCases.ComodidadTest.Command
 {
-    public class CrearComodidadHandlerTests
-    {
-        Mock<IComodidadRepository> _comodidadRepository;
-        Mock<IComodidadFactory> _comodidadFactory;
-        Mock<IUnitOfWork> _unitOfWork;
+	public class CrearComodidadHandlerTests
+	{
+		Mock<IComodidadRepository> _comodidadRepository;
+		Mock<IComodidadFactory> _comodidadFactory;
+		Mock<IUnitOfWork> _unitOfWork;
 
-        public CrearComodidadHandlerTests()
-        {
-            _comodidadRepository = new Mock<IComodidadRepository>();
-            _comodidadFactory = new Mock<IComodidadFactory>();
-            _unitOfWork = new Mock<IUnitOfWork>();
-        }
+		public CrearComodidadHandlerTests()
+		{
+			_comodidadRepository = new Mock<IComodidadRepository>();
+			_comodidadFactory = new Mock<IComodidadFactory>();
+			_unitOfWork = new Mock<IUnitOfWork>();
+		}
 
-        [Fact]
-        public void CrearComodidadConValoresValidos()
-        {
-            Comodidad comodidad = ComodidadMockFactory.ObtenerComodidad();
+		[Fact]
+		public void CrearComodidadConValoresValidos()
+		{
+			Comodidad comodidad = ComodidadMockFactory.ObtenerComodidad();
 
-            _comodidadRepository.Setup(_comodidadRepository => _comodidadRepository.FindByIdAsync(comodidad.Id))
-                .ReturnsAsync(comodidad);
-            _comodidadFactory.Setup(_comodidadFactory => _comodidadFactory.Crear(comodidad.Nombre, comodidad.Descripcion))
-                .Returns(comodidad);
-            var handler = new CrearComodidadHandler(
-                _comodidadRepository.Object,
-                _unitOfWork.Object,
-                _comodidadFactory.Object
-            );
-            var tcs = new CancellationTokenSource(1000);
+			_comodidadRepository.Setup(_comodidadRepository => _comodidadRepository.FindByIdAsync(comodidad.Id))
+				.ReturnsAsync(comodidad);
+			_comodidadFactory.Setup(_comodidadFactory => _comodidadFactory.Crear(comodidad.Nombre, comodidad.Descripcion))
+				.Returns(comodidad);
+			var handler = new CrearComodidadHandler(
+				_comodidadRepository.Object,
+				_unitOfWork.Object,
+				_comodidadFactory.Object
+			);
+			var tcs = new CancellationTokenSource(1000);
 
-            CrearComodidadCommand evento = new CrearComodidadCommand
-            {
-                Nombre = comodidad.Nombre,
-                Descripcion = comodidad.Descripcion,
-            };
+			CrearComodidadCommand evento = new CrearComodidadCommand
+			{
+				Nombre = comodidad.Nombre,
+				Descripcion = comodidad.Descripcion,
+			};
 
-            var idComodidad = handler.Handle(evento, tcs.Token);
+			var idComodidad = handler.Handle(evento, tcs.Token);
 
-            Assert.Equal(comodidad.Id, idComodidad.Result);
-        }
-    }
+			Assert.Equal(comodidad.Id, idComodidad.Result);
+		}
+	}
 }

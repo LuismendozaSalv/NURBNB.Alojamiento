@@ -9,36 +9,36 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Test.Domain.Factories
 {
-    public class ComodidadFactoryTests
-    {
-        [Fact]
-        public void Crear_ComodidadConValoresCorrectos()
-        {
-            // Arrange
-            string nombre = "Wifi";
-            string descripcion = "Acceso a Internet inalámbrico";
+	public class ComodidadFactoryTests
+	{
+		[Fact]
+		public void Crear_ComodidadConValoresCorrectos()
+		{
+			// Arrange
+			string nombre = "Wifi";
+			string descripcion = "Acceso a Internet inalámbrico";
 
-            ComodidadFactory factory = new ComodidadFactory();
+			ComodidadFactory factory = new ComodidadFactory();
 
-            // Act
-            Comodidad comodidad = factory.Crear(nombre, descripcion);
+			// Act
+			Comodidad comodidad = factory.Crear(nombre, descripcion);
 
-            // Assert
-            Assert.NotNull(comodidad);
-            Assert.Equal(nombre, comodidad.Nombre);
-            Assert.Equal(descripcion, comodidad.Descripcion);
-        }
+			// Assert
+			Assert.NotNull(comodidad);
+			Assert.Equal(nombre, comodidad.Nombre);
+			Assert.Equal(descripcion, comodidad.Descripcion);
+		}
 
-        [Theory]
-        [InlineData("", "Acceso a Internet inalámbrico")]
-        [InlineData("Wifi", "")]
-        public void CrearComodidad_NombreODescripcionVacio_ThrowsArgumentException(string nombre, string descripcion)
-        {
-            // Arrange
-            ComodidadFactory factory = new ComodidadFactory();
+		[Theory]
+		[InlineData("", "Acceso a Internet inalámbrico")]
+		[InlineData("Wifi", "")]
+		public void CrearComodidad_NombreODescripcionVacio_ThrowsArgumentException(string nombre, string descripcion)
+		{
+			// Arrange
+			ComodidadFactory factory = new ComodidadFactory();
 
-            // Act & Assert
-            Assert.Throws<BussinessRuleValidationException>(() => factory.Crear(nombre, descripcion));
-        }
-    }
+			// Act & Assert
+			Assert.Throws<BussinessRuleValidationException>(() => factory.Crear(nombre, descripcion));
+		}
+	}
 }

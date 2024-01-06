@@ -10,29 +10,29 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Infrastructure.EF.Repositories
 {
-    internal class CiudadRepository : ICiudadRepository
-    {
-        private readonly WriteDbContext _context;
+	internal class CiudadRepository : ICiudadRepository
+	{
+		private readonly WriteDbContext _context;
 
-        public CiudadRepository(WriteDbContext context)
-        {
-            _context = context;
-        }
-        public async Task CreateAsync(Ciudad obj)
-        {
-            await _context.Ciudad.AddAsync(obj);
-        }
+		public CiudadRepository(WriteDbContext context)
+		{
+			_context = context;
+		}
+		public async Task CreateAsync(Ciudad obj)
+		{
+			await _context.Ciudad.AddAsync(obj);
+		}
 
-        public async Task<Ciudad?> FindByIdAsync(Guid id)
-        {
-            return await _context.Ciudad.Include(x => x.Country)
-                .Where(x => x.Id == id).AsSplitQuery().FirstOrDefaultAsync();
-        }
+		public async Task<Ciudad?> FindByIdAsync(Guid id)
+		{
+			return await _context.Ciudad.Include(x => x.Country)
+				.Where(x => x.Id == id).AsSplitQuery().FirstOrDefaultAsync();
+		}
 
-        public Task UpdateAsync(Ciudad ciudad)
-        {
-            _context.Ciudad.Update(ciudad);
-            return Task.CompletedTask;
-        }
-    }
+		public Task UpdateAsync(Ciudad ciudad)
+		{
+			_context.Ciudad.Update(ciudad);
+			return Task.CompletedTask;
+		}
+	}
 }

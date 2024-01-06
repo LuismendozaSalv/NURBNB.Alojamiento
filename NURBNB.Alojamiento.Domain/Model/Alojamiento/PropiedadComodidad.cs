@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
 {
-    public class PropiedadComodidad : Entity
-    {
-        public Guid ComodidadId { get; private set; }
+	public class PropiedadComodidad : Entity
+	{
+		public Guid ComodidadId { get; private set; }
 
-        private PropiedadComodidad()
-        {
-            
-        }
-        public PropiedadComodidad(Guid comodidadId)
-        {
-            Id = Guid.NewGuid();
-            ComodidadId = comodidadId;
-        }
-    }
+		private PropiedadComodidad()
+		{
+
+		}
+		public PropiedadComodidad(Guid comodidadId)
+		{
+			Id = Guid.NewGuid();
+			ComodidadId = comodidadId;
+		}
+	}
 }

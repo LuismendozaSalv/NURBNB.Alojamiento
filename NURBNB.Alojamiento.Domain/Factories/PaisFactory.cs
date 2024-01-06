@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Domain.Factories
 {
-    public class PaisFactory : IPaisFactory
-    {
-        public Pais Crear(string nombre, string codigoPais)
-        {
-            return new Pais(nombre, codigoPais);
-        }
-    }
+	public class PaisFactory : IPaisFactory
+	{
+		public Pais Crear(string nombre, string codigoPais)
+		{
+			return new Pais(nombre, codigoPais);
+		}
+	}
 }

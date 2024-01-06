@@ -9,28 +9,28 @@ using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Infrastructure.EF.ReadModel
 {
-    [Table("reserva")]
-    public class ReservaReadModel
-    {
-        [Key]
-        [Column("Id")]
-        public Guid Id { get; set; }
+	[Table("reserva")]
+	public class ReservaReadModel
+	{
+		[Key]
+		[Column("Id")]
+		public Guid Id { get; set; }
 
-        [Required]
-        [Column("propiedadId")]
-        public Guid PropiedadId { get; set; }
+		[Required]
+		[Column("propiedadId")]
+		public Guid PropiedadId { get; set; }
 
-        [Column("fechaEntrada")]
-        [Required]
-        public DateTime FechaEntrada { get; set; }
+		[Column("fechaEntrada")]
+		[Required]
+		public DateTime FechaEntrada { get; set; }
 
-        [Column("fechaSalida")]
-        [Required]
-        public DateTime FechaSalida { get; set; }
+		[Column("fechaSalida")]
+		[Required]
+		public DateTime FechaSalida { get; set; }
 
-        [Required]
-        [Column("estadoReserva")]
-        [MaxLength(25)]
-        public string EstadoReserva { get; set; }
-    }
+		[Required]
+		[Column("estadoReserva")]
+		[MaxLength(25)]
+		public string EstadoReserva { get; set; }
+	}
 }

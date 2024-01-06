@@ -3,22 +3,22 @@ using Restaurant.SharedKernel.Rules;
 
 namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
 {
-    public class Comodidad : Entity
-    {
-        public string Nombre { get; private set; }
-        public string Descripcion { get; private set; }
+	public class Comodidad : Entity
+	{
+		public string Nombre { get; private set; }
+		public string Descripcion { get; private set; }
 
-        public Comodidad()
-        {
-            
-        }
-        public Comodidad(string nombre, string descripcion)
-        {
-            CheckRule(new StringNotNullOrEmptyRule(nombre));
-            CheckRule(new StringNotNullOrEmptyRule(descripcion));
-            Id = Guid.NewGuid();
-            Nombre = nombre;
-            Descripcion = descripcion;
-        }   
-    }
+		internal Comodidad()
+		{
+
+		}
+		public Comodidad(string nombre, string descripcion)
+		{
+			CheckRule(new StringNotNullOrEmptyRule(nombre));
+			CheckRule(new StringNotNullOrEmptyRule(descripcion));
+			Id = Guid.NewGuid();
+			Nombre = nombre;
+			Descripcion = descripcion;
+		}
+	}
 }

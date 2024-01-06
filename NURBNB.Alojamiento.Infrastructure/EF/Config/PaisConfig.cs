@@ -10,25 +10,25 @@ using NURBNB.Alojamiento.Domain.Model.Alojamiento;
 
 namespace NURBNB.Alojamiento.Infrastructure.EF.Config
 {
-    internal class PaisConfig : IEntityTypeConfiguration<Pais>
-    {
-        public void Configure(EntityTypeBuilder<Pais> builder)
-        {
-            builder.ToTable("pais");
-            builder.HasKey(x => x.Id);
+	internal class PaisConfig : IEntityTypeConfiguration<Pais>
+	{
+		public void Configure(EntityTypeBuilder<Pais> builder)
+		{
+			builder.ToTable("pais");
+			builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Id)
-                .HasColumnName("paisId");
+			builder.Property(x => x.Id)
+				.HasColumnName("paisId");
 
-            builder.Property(x => x.Name)
-                .HasColumnName("nombre");
+			builder.Property(x => x.Name)
+				.HasColumnName("nombre");
 
-            builder.Property(x => x.CountryCode)
-                .HasColumnName("paisCode");
+			builder.Property(x => x.CountryCode)
+				.HasColumnName("paisCode");
 
-            builder.Ignore("_domainEvents");
-            builder.Ignore(x => x.DomainEvents);
-            builder.Ignore(x => x.Ciudades);
-        }
-    }
+			builder.Ignore("_domainEvents");
+			builder.Ignore(x => x.DomainEvents);
+			builder.Ignore(x => x.Ciudades);
+		}
+	}
 }
