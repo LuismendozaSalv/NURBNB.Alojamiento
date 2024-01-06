@@ -5,9 +5,7 @@ name: Staging
 
 on:
   push:
-    branches: [ "develop" ]
-  pull_request:
-    branches: [ "develop" ]
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -89,9 +87,6 @@ jobs:
 
       - name: Stop the server
         run: ssh staging 'cd /var/www/html && bash deploy.sh'
-
-      - name: Do deploy
-        run: ssh staging 'cd /var/www/pedidos-app && bash deploy.sh'
         
       - name: Start the server
         if: ${{ always() }}
