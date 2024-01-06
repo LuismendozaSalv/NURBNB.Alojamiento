@@ -17,7 +17,7 @@ namespace NURBNB.Alojamiento.Domain.Model.Alojamiento
 
 		}
 
-		internal Reserva(Guid reservaId, DateTime fechaEntrada, DateTime fechaSalida, EstadoReserva estado)
+		public Reserva(Guid reservaId, DateTime fechaEntrada, DateTime fechaSalida, EstadoReserva estado)
 		{
 			Id = reservaId;
 			FechaEntrada = fechaEntrada;
