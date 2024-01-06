@@ -1,4 +1,5 @@
-﻿using NURBNB.Alojamiento.Domain.Model.Alojamiento;
+﻿using NURBNB.Alojamiento.Domain.Factories;
+using NURBNB.Alojamiento.Domain.Model.Alojamiento;
 using NURBNB.Alojamiento.Test.Application.UseCases.AlojamientoTest.Command.CrearPropiedad;
 using NURBNB.Alojamiento.Test.Application.UseCases.CiudadTest.Command.CrearCiudad;
 using Restaurant.SharedKernel.Core;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace NURBNB.Alojamiento.Test.Domain.Model
@@ -170,5 +172,25 @@ namespace NURBNB.Alojamiento.Test.Domain.Model
 			// Act & Assert
 			Assert.Throws<ArgumentException>(() => propiedad.AgregarRegla(regla));
 		}
+
+
+		[Fact]
+		public void AgregarReserva_DebeAgregarRegla()
+		{
+			//Arrange
+			DateTime fechaEntrada = DateTime.Now;
+			DateTime fechaSalida = DateTime.Now;
+
+			ReservaFactory factory = new ReservaFactory();
+
+			// Act
+			Reserva reserva = factory.Crear(Guid.NewGuid(), fechaEntrada, fechaSalida, EstadoReserva.Pendiente);
+			Propiedad propiedad = PropiedadMockFactory.GetPropiedadApartamento();
+			propiedad.AgregarReserva(reserva);
+
+			// Assert
+			Assert.Equal(reserva.Id, propiedad.Reservas.First().Id);
+		}
+
 	}
 }
